@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "830516589333",
+    "firebase_url": "https://petpositoryv1.firebaseio.com",
+    "project_id": "petpositoryv1",
+    "storage_bucket": "petpositoryv1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830516589333:android:04185db8f6733fe9",
+        "android_client_info": {
+          "package_name": "com.example.petpository_v1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830516589333-ropn7j4evjbevbl8tetthf4vb02uac28.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy52NApcrT48w_iPRl9EFiGz4gwinJ2jA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
