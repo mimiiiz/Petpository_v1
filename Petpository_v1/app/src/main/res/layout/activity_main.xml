@@ -52,7 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_home_black_24dp"
-                android:background="@color/white"/>
+                android:background="@color/white"
+                android:onClick="gotoSitterMain"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,5 +63,4 @@
                 android:layout_marginTop="60dp"/>
         </FrameLayout>
     </LinearLayout>
-
 </LinearLayout>
