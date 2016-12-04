@@ -25,7 +25,6 @@ public class Place implements Serializable {
     private Double placeLatitude;
     private Double placeLongtitude;
     private int placeNumberImg;
-    private int numberImage;
     private String uidSitter;
     private  String placeActivity;
 
@@ -36,14 +35,7 @@ public class Place implements Serializable {
     public void setPlaceActivity(String placeActivity) {
         this.placeActivity = placeActivity;
     }
-
-    public int getNumberImage() {
-        return numberImage;
-    }
-
-    public void setNumberImage(int numberImage) {
-        this.numberImage = numberImage;
-    }
+    
 
     public String getUidSitter() {
         return uidSitter;
