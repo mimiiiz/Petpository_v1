@@ -32,7 +32,6 @@ public class PendingActivity extends AppCompatActivity {
     private Button btn_accept, btn_denied;
     protected DatabaseReference mDatabase;
     private RequestPet requestPetObj;
-    private ArrayList<RequestPet> requestPetArrayList;
     private Pet petObj;
 
     @Override
@@ -52,12 +51,11 @@ public class PendingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot mSnap : dataSnapshot.getChildren()) {
-                    requestPetObj = new RequestPet();
 
                     //check place id same selected && status = pending
                     if (mSnap.child("requestPlaceID").getValue().toString().equals(requestPlaceId)
                             && mSnap.child("requestStatus").getValue().toString().equals("pending")) {
-
+                        requestPetObj = new RequestPet();
                         requestPetObj.setRequestID(mSnap.child("requestID").getValue().toString());
                         requestPetObj.setRequestUID_owner(mSnap.child("requestUID_owner").getValue().toString());
                         requestPetObj.setRequestUID_sitter(mSnap.child("requestUID_sitter").getValue().toString());
@@ -78,9 +76,8 @@ public class PendingActivity extends AppCompatActivity {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         } //end catch
-                        petObj = createPet(requestPetObj.getRequestPetID(), requestPetObj.getRequestUID_owner());
 
-//                        requestPetArrayList.add(requestPetObj);
+                        petObj = createPet(requestPetObj.getRequestPetID(), requestPetObj.getRequestUID_owner());
 
                     } //end if
                 } // end for
@@ -96,16 +93,12 @@ public class PendingActivity extends AppCompatActivity {
     }
 
     protected Pet createPet(String requestPetID, String requestUID_owner){
-        Log.d("UID Owner>> ", requestPetObj.getRequestUID_owner());
-        Log.d("Pet Id >> ", requestPetObj.getRequestPetID());
-
 
         petObj = new Pet();
         Query mQ_getPet = mDatabase.child("Owner").child(requestPetObj.getRequestUID_owner()).child("Pet").child(requestPetObj.getRequestPetID()).orderByValue();
         mQ_getPet.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("Pet>>> ", dataSnapshot.toString());
                 petObj.setPetID(dataSnapshot.child("petID").getValue().toString());
                 petObj.setPetName(dataSnapshot.child("petName").getValue().toString());
                 petObj.setPetType(dataSnapshot.child("petType").getValue().toString());
@@ -125,8 +118,6 @@ public class PendingActivity extends AppCompatActivity {
 
     protected void setTextView(){
 
-        requestPetObj.getRequestPetID();
-
         tv_requestPetName = (TextView) findViewById(R.id.tv_requestPetName);
         tv_requestPetSize = (TextView) findViewById(R.id.tv_requestPetSize);
         tv_requestPetType = (TextView) findViewById(R.id.tv_requestPetType);
@@ -137,8 +128,8 @@ public class PendingActivity extends AppCompatActivity {
         tv_requestPetName.setText(petObj.getPetName());
         tv_requestPetType.setText(petObj.getPetType());
         tv_requestPetSize.setText(petObj.getPetSize());
-        tv_requestStartDate.setText(requestPetObj.getRequestStartDate().toString());
-        tv_requestEndDate.setText(requestPetObj.getRequestEndDate().toString());
+        tv_requestStartDate.setText(requestPetObj.getRequestStartDate());
+        tv_requestEndDate.setText(requestPetObj.getRequestEndDate());
 
     }
 
@@ -149,8 +140,6 @@ public class PendingActivity extends AppCompatActivity {
                 requestPetObj.setRequestStatus("accept");
                 mDatabase.child("RequestPet").child(requestPetObj.getRequestID()).child("requestStatus").setValue(requestPetObj.getRequestStatus());
                 mDatabase.child("Sitter").child(requestPetObj.getRequestPlaceID()).child("Client").child(requestPetObj.getRequestID()).setValue(requestPetObj);
-
-
                 break;
             case R.id.btn_denied:
                 break;
