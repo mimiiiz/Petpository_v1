@@ -27,6 +27,15 @@ public class Place implements Serializable {
     private int placeNumberImg;
     private int numberImage;
     private String uidSitter;
+    private  String placeActivity;
+
+    public String getPlaceActivity() {
+        return placeActivity;
+    }
+
+    public void setPlaceActivity(String placeActivity) {
+        this.placeActivity = placeActivity;
+    }
 
     public int getNumberImage() {
         return numberImage;
