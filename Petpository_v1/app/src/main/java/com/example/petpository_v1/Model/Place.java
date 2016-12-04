@@ -25,7 +25,7 @@ public class Place implements Serializable {
     private Double placeLatitude;
     private Double placeLongtitude;
     private int placeNumberImg;
-    private String uidSitter;
+    private String placeUID_sitter;
     private  String placeActivity;
 
     public String getPlaceActivity() {
@@ -35,14 +35,14 @@ public class Place implements Serializable {
     public void setPlaceActivity(String placeActivity) {
         this.placeActivity = placeActivity;
     }
-    
 
-    public String getUidSitter() {
-        return uidSitter;
+
+    public String getPlaceUID_sitter() {
+        return placeUID_sitter;
     }
 
-    public void setUidSitter(String uidSitter) {
-        this.uidSitter = uidSitter;
+    public void setPlaceUID_sitter(String placeUID_sitter) {
+        this.placeUID_sitter = placeUID_sitter;
     }
 
     public String getPlaceId() {
