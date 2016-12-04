@@ -170,7 +170,8 @@
             android:id="@+id/btn_accept"
             android:text="ACCEPT"
             android:layout_weight="1"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="5dp"
+            android:onClick="sentRequest"/>
 
         <Button
             android:layout_width="match_parent"
@@ -178,7 +179,8 @@
             android:id="@+id/btn_denied"
             android:text="DENIED"
             android:layout_weight="1"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="5dp"
+            android:onClick="sentRequest"/>
 
     </LinearLayout>
 

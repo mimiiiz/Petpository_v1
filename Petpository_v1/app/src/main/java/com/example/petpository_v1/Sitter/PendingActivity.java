@@ -64,7 +64,6 @@ public class PendingActivity extends AppCompatActivity {
                         requestPetObj.setRequestStatus(mSnap.child("requestStatus").getValue().toString());
                         requestPetObj.setRequestPlaceID(mSnap.child("requestPlaceID").getValue().toString());
                         requestPetObj.setRequestPetID(mSnap.child("requestPetID").getValue().toString());
-
                         requestPetObj.setRequestStartDate(mSnap.child("requestStartDate").getValue().toString());
                         requestPetObj.setRequestEndDate(mSnap.child("requestEndDate").getValue().toString());
 
@@ -128,7 +127,6 @@ public class PendingActivity extends AppCompatActivity {
 
         requestPetObj.getRequestPetID();
 
-
         tv_requestPetName = (TextView) findViewById(R.id.tv_requestPetName);
         tv_requestPetSize = (TextView) findViewById(R.id.tv_requestPetSize);
         tv_requestPetType = (TextView) findViewById(R.id.tv_requestPetType);
@@ -142,16 +140,22 @@ public class PendingActivity extends AppCompatActivity {
         tv_requestStartDate.setText(requestPetObj.getRequestStartDate().toString());
         tv_requestEndDate.setText(requestPetObj.getRequestEndDate().toString());
 
+    }
+
+    public void sentRequest(View view){
+        switch (view.getId()){
+            case R.id.btn_accept:
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                requestPetObj.setRequestStatus("accept");
+                mDatabase.child("RequestPet").child(requestPetObj.getRequestID()).child("requestStatus").setValue(requestPetObj.getRequestStatus());
+                mDatabase.child("Sitter").child(requestPetObj.getRequestPlaceID()).child("Client").child(requestPetObj.getRequestID()).setValue(requestPetObj);
 
 
-//
-//        btn_accept = (Button) findViewById(R.id.btn_accept);
-//        btn_accept.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+                break;
+            case R.id.btn_denied:
+                break;
+        }
+
     }
 
 }
