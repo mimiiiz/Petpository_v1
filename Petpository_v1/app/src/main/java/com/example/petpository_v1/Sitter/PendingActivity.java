@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.petpository_v1.Model.Pet;
 import com.example.petpository_v1.Model.RequestPet;
@@ -43,7 +44,6 @@ public class PendingActivity extends AppCompatActivity {
         Intent intent = getIntent();
         requestPlaceId = intent.getStringExtra("placeId");
 
-//        requestPetArrayList = new ArrayList<RequestPet>();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Query mQ = mDatabase.child("RequestPet").orderByChild("requestTimeStamp");
@@ -140,6 +140,7 @@ public class PendingActivity extends AppCompatActivity {
                 requestPetObj.setRequestStatus("accept");
                 mDatabase.child("RequestPet").child(requestPetObj.getRequestID()).child("requestStatus").setValue(requestPetObj.getRequestStatus());
                 mDatabase.child("Sitter").child(requestPetObj.getRequestPlaceID()).child("Client").child(requestPetObj.getRequestID()).setValue(requestPetObj);
+                Toast.makeText(this, "Accepted !!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_denied:
                 break;
