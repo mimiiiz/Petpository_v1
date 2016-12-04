@@ -10,4 +10,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.petpository_v1.Sitter.SitterMainActivity">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Noti"
+        android:id="@+id/btn_gotoPending"/>
+
 </RelativeLayout>
