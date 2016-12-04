@@ -27,6 +27,9 @@ dependencies {
     compile 'com.google.firebase:firebase-core:9.8.0'
     compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
+
+    // firebase database ...mimi
+    compile 'com.google.firebase:firebase-database:9.8.0'
 }
 //init firebase ..mimi
 apply plugin: 'com.google.gms.google-services'

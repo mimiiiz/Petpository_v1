@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_pending"
     android:layout_width="match_parent"
@@ -8,6 +8,179 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.petpository_v1.Sitter.PendingActivity">
+    tools:context="com.example.petpository_v1.Sitter.PendingActivity"
+    android:orientation="vertical"
+    >
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_requestPetName"
+        android:text="PetName"
+        android:textSize="30dp"
+        android:layout_margin="20dp"
+        android:gravity="center_horizontal"
+        android:textStyle="normal|bold"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgv_petRequest"
+        android:maxHeight="100dp"
+        android:layout_margin="20dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Owner : "
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="normal|bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Size : "
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="normal|bold" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Breed : "
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="normal|bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date : "
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="normal|bold" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" to "
+                    android:textSize="20dp"
+                    android:layout_gravity="end"
+                    android:textStyle="normal|bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="mimi..."
+                    android:id="@+id/tv_requestOwnerEmail"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="size..."
+                    android:id="@+id/tv_requestPetSize"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="type..."
+                    android:id="@+id/tv_requestPetType"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="start date..."
+                    android:id="@+id/tv_requestStartDate"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="end date..."
+                    android:id="@+id/tv_requestEndDate"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_accept"
+            android:text="ACCEPT"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_denied"
+            android:text="DENIED"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
