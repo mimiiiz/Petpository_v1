@@ -25,6 +25,24 @@ public class Place implements Serializable {
     private Double placeLatitude;
     private Double placeLongtitude;
     private int placeNumberImg;
+    private int numberImage;
+    private String uidSitter;
+
+    public int getNumberImage() {
+        return numberImage;
+    }
+
+    public void setNumberImage(int numberImage) {
+        this.numberImage = numberImage;
+    }
+
+    public String getUidSitter() {
+        return uidSitter;
+    }
+
+    public void setUidSitter(String uidSitter) {
+        this.uidSitter = uidSitter;
+    }
 
     public String getPlaceId() {
 

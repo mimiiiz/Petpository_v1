@@ -1,12 +1,13 @@
 package com.example.petpository_v1.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by User on 2/12/2559.
  */
 
-public class Pet {
+public class Pet  implements Serializable {
 
     private String petID;
     private String petName;
