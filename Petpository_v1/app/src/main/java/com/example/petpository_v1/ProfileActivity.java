@@ -77,6 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         this.overridePendingTransition(R.anim.anim_slide_out_left,R.anim.anim_slide_in_right);
+        finish();
     }
 
     public void sigOut(View view){
