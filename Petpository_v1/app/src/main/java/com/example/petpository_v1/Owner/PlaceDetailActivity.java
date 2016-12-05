@@ -192,7 +192,9 @@ public class PlaceDetailActivity extends AppCompatActivity implements OnMapReady
     }
 
     public void onClickBook(View v){
-
+        Intent intent = new Intent(this, ChoosePetActivity.class);
+        intent.putExtra("place", place);
+        startActivity(intent);
     }
 
 
