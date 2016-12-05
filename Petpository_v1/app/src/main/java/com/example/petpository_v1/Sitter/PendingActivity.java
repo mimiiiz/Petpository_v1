@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,22 +17,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class PendingActivity extends AppCompatActivity {
 
     private String requestPlaceId;
     private TextView tv_requestPetName, tv_requestOwnerEmail, tv_requestPetSize,
             tv_requestPetType, tv_requestStartDate, tv_requestEndDate;
-    private Button btn_accept, btn_denied;
     protected DatabaseReference mDatabase;
     private RequestPet requestPetObj;
-    private Pet petObj;
+    public ArrayList<RequestPet> requestPetsArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,80 +36,11 @@ public class PendingActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         requestPlaceId = intent.getStringExtra("placeId");
-
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query mQ = mDatabase.child("RequestPet").orderByChild("requestTimeStamp");
-        mQ.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot mSnap : dataSnapshot.getChildren()) {
-
-                    //check place id same selected && status = pending
-                    if (mSnap.child("requestPlaceID").getValue().toString().equals(requestPlaceId)
-                            && mSnap.child("requestStatus").getValue().toString().equals("pending")) {
-                        requestPetObj = new RequestPet();
-                        requestPetObj.setRequestID(mSnap.child("requestID").getValue().toString());
-                        requestPetObj.setRequestUID_owner(mSnap.child("requestUID_owner").getValue().toString());
-                        requestPetObj.setRequestUID_sitter(mSnap.child("requestUID_sitter").getValue().toString());
-                        requestPetObj.setRequestStatus(mSnap.child("requestStatus").getValue().toString());
-                        requestPetObj.setRequestPlaceID(mSnap.child("requestPlaceID").getValue().toString());
-                        requestPetObj.setRequestPetID(mSnap.child("requestPetID").getValue().toString());
-                        requestPetObj.setRequestStartDate(mSnap.child("requestStartDate").getValue().toString());
-                        requestPetObj.setRequestEndDate(mSnap.child("requestEndDate").getValue().toString());
-
-                        try {
-                            DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-
-                            String reqTimeStampString = mSnap.child("requestTimeStamp").getValue().toString();
-                            Date reqTimeStamp = df.parse(reqTimeStampString);
-                            requestPetObj.setRequestTimeStamp(reqTimeStamp);
-
-
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        } //end catch
-
-                        petObj = createPet(requestPetObj.getRequestPetID(), requestPetObj.getRequestUID_owner());
-
-                    } //end if
-                } // end for
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        }); //end value listener
-
+        createRequestPet();
 
     }
 
-    protected Pet createPet(String requestPetID, String requestUID_owner){
-
-        petObj = new Pet();
-        Query mQ_getPet = mDatabase.child("Owner").child(requestPetObj.getRequestUID_owner()).child("Pet").child(requestPetObj.getRequestPetID()).orderByValue();
-        mQ_getPet.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                petObj.setPetID(dataSnapshot.child("petID").getValue().toString());
-                petObj.setPetName(dataSnapshot.child("petName").getValue().toString());
-                petObj.setPetType(dataSnapshot.child("petType").getValue().toString());
-                petObj.setPetSize(dataSnapshot.child("petSize").getValue().toString());
-                setTextView();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-        return petObj;
-    }
-
-    protected void setTextView(){
+    protected void setTextView(RequestPet requestPetObj){
 
         tv_requestPetName = (TextView) findViewById(R.id.tv_requestPetName);
         tv_requestPetSize = (TextView) findViewById(R.id.tv_requestPetSize);
@@ -125,6 +49,7 @@ public class PendingActivity extends AppCompatActivity {
         tv_requestStartDate = (TextView) findViewById(R.id.tv_requestStartDate);
         tv_requestEndDate = (TextView) findViewById(R.id.tv_requestEndDate);
 
+        Pet petObj = requestPetObj.getPet();
         tv_requestPetName.setText(petObj.getPetName());
         tv_requestPetType.setText(petObj.getPetType());
         tv_requestPetSize.setText(petObj.getPetSize());
@@ -143,9 +68,57 @@ public class PendingActivity extends AppCompatActivity {
                 Toast.makeText(this, "Accepted !!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_denied:
+                requestPetObj.setRequestStatus("denied");
+                mDatabase.child("RequestPet").child(requestPetObj.getRequestID()).child("requestStatus").setValue(requestPetObj.getRequestStatus());
+                Toast.makeText(this, "Denied", Toast.LENGTH_SHORT).show();
                 break;
         }
 
     }
+
+    public void createRequestPet(){
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query mQ = mDatabase.child("RequestPet").orderByChild("requestTimeStamp");
+        mQ.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                requestPetsArray = new ArrayList<RequestPet>();
+                for (DataSnapshot mSnap : dataSnapshot.getChildren()) {
+
+                    //check place id same selected && status = pending
+                    if (mSnap.child("requestPlaceID").getValue().toString().equals(requestPlaceId)
+                            && mSnap.child("requestStatus").getValue().toString().equals("pending")) {
+                        requestPetObj = new RequestPet();
+                        requestPetObj = mSnap.getValue(RequestPet.class);
+                        Log.d("req obj in if>>>>> ", mSnap.toString());
+                        requestPetsArray.add(requestPetObj);
+                    } //end if
+                } // end for
+
+                Log.d("size >>> ...", requestPetsArray.size() + " .............");
+
+                if (requestPetsArray.size() != 0){
+                    for (RequestPet reqPet : requestPetsArray){
+                        setTextView(reqPet);
+                    }
+
+                }else {
+                    Intent intentToRecentReq = new Intent(PendingActivity.this, RecentRequestActivity.class);
+                    startActivity(intentToRecentReq);
+                    finish();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        }); //end value listener
+
+    }
+
 
 }

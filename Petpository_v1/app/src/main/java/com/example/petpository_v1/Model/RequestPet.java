@@ -14,10 +14,18 @@ public class RequestPet implements Serializable {
     private String requestUID_sitter;
     private String requestStatus;
     private String requestPlaceID;
-    private Date requestTimeStamp;
+    private String requestTimeStamp;
     private String requestStartDate;
     private String requestEndDate;
-    private String requestPetID;
+    private Pet Pet;
+
+    public com.example.petpository_v1.Model.Pet getPet() {
+        return Pet;
+    }
+
+    public void setPet(com.example.petpository_v1.Model.Pet pet) {
+        Pet = pet;
+    }
 
     public String getRequestStatus() {
         return requestStatus;
@@ -59,11 +67,11 @@ public class RequestPet implements Serializable {
         this.requestPlaceID = requestPlaceID;
     }
 
-    public Date getRequestTimeStamp() {
+    public String getRequestTimeStamp() {
         return requestTimeStamp;
     }
 
-    public void setRequestTimeStamp(Date requestTimeStamp) {
+    public void setRequestTimeStamp(String requestTimeStamp) {
         this.requestTimeStamp = requestTimeStamp;
     }
 
@@ -83,11 +91,5 @@ public class RequestPet implements Serializable {
         this.requestEndDate = requestEndDate;
     }
 
-    public String getRequestPetID() {
-        return requestPetID;
-    }
 
-    public void setRequestPetID(String requestPetID) {
-        this.requestPetID = requestPetID;
-    }
 }
