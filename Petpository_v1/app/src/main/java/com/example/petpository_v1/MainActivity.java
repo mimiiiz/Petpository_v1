@@ -41,4 +41,9 @@ public class MainActivity extends AppCompatActivity {
         Intent gotoSitterMain = new Intent(MainActivity.this, SitterMainActivity.class);
         startActivity(gotoSitterMain);
     }
+
+    public void gotoSitterMain(View view){
+        Intent gotoSitterMain = new Intent(MainActivity.this, SitterMainActivity.class);
+        startActivity(gotoSitterMain);
+    }
 }
