@@ -17,18 +17,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".SignInActivity" />
-        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".Sitter.RecentRequestActivity" />
         <activity android:name=".Sitter.PendingActivity" />
         <activity android:name=".Sitter.SitterMainActivity" />
         <activity android:name=".Owner.OwnerMainActivity" />
-        <activity android:name=".Owner.AddPetActivity" />
+        <activity android:name=".Owner.AddPet1Activity" />
         <activity android:name=".Owner.PlaceDetailActivity" />
         <activity android:name=".Sitter.AddPlaceActivity" />
         <activity android:name=".Owner.SentRequestActivity" />
         <activity android:name=".Owner.ChoosePetActivity" />
+        <activity android:name=".Owner.MyPetsActivity" />
     </application>
 
 </manifest>
