@@ -6,9 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -60,10 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
                     .bitmapTransform(new CropCircleTransformation(this))
                     .into(image);
         }
-
         mainButton = (TextView) findViewById(R.id.main_button);
-
-
         if (mode.equals("Owner")) {
             mainButton.setText("My pets");
         }else if (mode.equals("Sitter")){
@@ -72,9 +67,28 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        this.overridePendingTransition(R.anim.anim_slide_in_left,R.anim.anim_slide_out_right);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.anim_slide_out_left,R.anim.anim_slide_in_right);
+        finish();
+    }
+
+    public void sigOut(View view){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(this, SignInActivity.class));
+        finish();
+
+    }
     public void switchMode(View view){
-        SharedPreferences sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         editor.remove("mode");
         editor.commit();
         startActivity(new Intent(this, MainActivity.class));
