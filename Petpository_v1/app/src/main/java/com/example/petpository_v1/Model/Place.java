@@ -1,7 +1,9 @@
 package com.example.petpository_v1.Model;
 
 import java.io.Serializable;
+import java.security.acl.Owner;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by User on 2/12/2559.
@@ -25,8 +27,11 @@ public class Place implements Serializable {
     private Double placeLatitude;
     private Double placeLongtitude;
     private int placeNumberImg;
-    private String placeUID_sitter;
+    private String uidSitter;
     private  String placeActivity;
+    private int placeDogNum;
+    private ArrayList<String> placeDogSize;
+    private Map<String, RequestPet> Client;
 
     public String getPlaceActivity() {
         return placeActivity;
@@ -37,13 +42,6 @@ public class Place implements Serializable {
     }
 
 
-    public String getPlaceUID_sitter() {
-        return placeUID_sitter;
-    }
-
-    public void setPlaceUID_sitter(String placeUID_sitter) {
-        this.placeUID_sitter = placeUID_sitter;
-    }
 
     public String getPlaceId() {
 
@@ -180,5 +178,37 @@ public class Place implements Serializable {
 
     public void setPlaceNumberImg(int placeNumberImg) {
         this.placeNumberImg = placeNumberImg;
+    }
+
+    public int getPlaceDogNum() {
+        return placeDogNum;
+    }
+
+    public void setPlaceDogNum(int placeDogNum) {
+        this.placeDogNum = placeDogNum;
+    }
+
+    public ArrayList<String> getPlaceDogSize() {
+        return placeDogSize;
+    }
+
+    public void setPlaceDogSize(ArrayList<String> placeDogSize) {
+        this.placeDogSize = placeDogSize;
+    }
+
+    public String getUidSitter() {
+        return uidSitter;
+    }
+
+    public void setUidSitter(String uidSitter) {
+        this.uidSitter = uidSitter;
+    }
+
+    public Map<String, RequestPet> getClient() {
+        return Client;
+    }
+
+    public void setClient(Map<String, RequestPet> client) {
+        Client = client;
     }
 }
