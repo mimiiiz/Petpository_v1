@@ -18,6 +18,7 @@ public class RequestPet implements Serializable {
     private String requestStartDate;
     private String requestEndDate;
     private Pet Pet;
+    private String requestPetID;
 
     public com.example.petpository_v1.Model.Pet getPet() {
         return Pet;
@@ -79,7 +80,7 @@ public class RequestPet implements Serializable {
         return requestStartDate;
     }
 
-    public void   setRequestStartDate(String requestStartDate) {
+    public void setRequestStartDate(String requestStartDate) {
         this.requestStartDate = requestStartDate;
     }
 
