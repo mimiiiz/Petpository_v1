@@ -8,15 +8,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".SignInActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity"/>
         <activity android:name=".Sitter.RecentRequestActivity" />
         <activity android:name=".Sitter.PendingActivity" />
         <activity android:name=".Sitter.SitterMainActivity" />
@@ -25,7 +28,7 @@
         <activity android:name=".Owner.PlaceDetailActivity" />
         <activity android:name=".Sitter.AddPlaceActivity" />
         <activity android:name=".Owner.SentRequestActivity" />
-        <activity android:name=".Owner.ChoosePetActivity"></activity>
+        <activity android:name=".Owner.ChoosePetActivity" />
     </application>
 
 </manifest>

@@ -16,4 +16,9 @@
         android:text="Noti"
         android:id="@+id/btn_gotoPending"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="profile"
+        android:onClick="profileMenu"/>
 </RelativeLayout>
