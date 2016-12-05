@@ -11,7 +11,6 @@
     tools:context="com.example.petpository_v1.MainActivity"
     android:orientation="vertical">
 
-<<<<<<< HEAD
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
