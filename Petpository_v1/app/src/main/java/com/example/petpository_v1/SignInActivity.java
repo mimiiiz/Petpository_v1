@@ -1,5 +1,6 @@
 package com.example.petpository_v1;
 
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.petpository_v1.Model.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -26,6 +28,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
 
@@ -47,9 +51,15 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
+                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    User currentUser = new User();
+                    currentUser.uid =  user.getUid();
+                    currentUser.name=  user.getDisplayName();
+                    currentUser.email = user.getEmail();
+                    mDatabase.child("Users").child(user.getUid()).setValue(currentUser);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -63,10 +73,8 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 .requestEmail()
                 .build();
 
-        Log.e("web_client_id", String.valueOf(R.string.default_web_client_id));
         // Build a GoogleApiClient with access to the Google Sign-In API and the
         // options specified by gso.
-
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
@@ -153,10 +161,9 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void updateUI(boolean signedIn) {
         if (signedIn) {
-            startActivity(new Intent(this, MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         } else {
             Toast.makeText(this, "Sign In failed", Toast.LENGTH_SHORT).show();

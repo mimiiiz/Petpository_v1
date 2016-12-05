@@ -38,7 +38,9 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_pets_black_24dp"
                 android:tint="@color/colorTextIcons"
-                android:background="@color/colorPrimary" />
+                android:background="@color/colorPrimary"
+                android:id="@+id/enter_pet_owner_button"
+                android:onClick="enterAsOwner"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +63,9 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_home_black_24dp"
                 android:tint="@color/colorTextIcons"
-                android:background="@color/colorPrimary"/>
+                android:background="@color/colorPrimary"
+                android:id="@+id/enter_pet_sitter_button"
+                android:onClick="enterAsSitter"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

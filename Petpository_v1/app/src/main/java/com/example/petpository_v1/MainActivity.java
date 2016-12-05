@@ -1,9 +1,14 @@
 package com.example.petpository_v1;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
+import com.example.petpository_v1.Owner.OwnerMainActivity;
+import com.example.petpository_v1.Sitter.SitterMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -11,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,34 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, SignInActivity.class));
             finish();
             return;
+        }
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+    }
+
+    public void enterAsOwner(View view){
+        editor.putString("mode", "Owner");
+        editor.commit();
+        startActivity(new Intent(this, OwnerMainActivity.class));
+
+    }
+
+    public void enterAsSitter(View view){
+        editor.putString("mode", "Sitter");
+        editor.commit();
+        startActivity(new Intent(this, SitterMainActivity.class));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String mode = sharedPreferences.getString("mode",null);
+        if (mode != null) {
+            if (mode.equals("Owner")) {
+                startActivity(new Intent(this, OwnerMainActivity.class));
+            } else if (mode.equals("Sitter")) {
+                startActivity(new Intent(this, SitterMainActivity.class));
+            }
         }
     }
 }
