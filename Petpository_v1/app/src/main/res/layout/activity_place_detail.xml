@@ -4,10 +4,285 @@
     android:id="@+id/activity_place_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.petpository_v1.Owner.PlaceDetailActivity">
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/footer"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:id="@+id/myLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:fillViewport="true">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/placeimg"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <TextView
+                android:text="Cotton Dog Resort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:id="@+id/nametv"
+                android:layout_below="@+id/placeimg"
+                android:layout_marginTop="20dp"
+                android:textSize="22sp"
+                android:textStyle="normal|bold"
+                android:fontFamily="sans-serif" />
+
+            <!--************************Detail************************-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nametv"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/detailtv"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#e1e1e1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@+id/detailtv"/>
+
+            <!--************************ Size ************************-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="Size"
+                android:layout_below="@+id/detailtv"
+                android:id="@+id/sizetv"
+                android:textSize="18sp"
+                android:textStyle="normal|bold" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sizetv"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/sizeimg">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/large"
+                    android:layout_alignParentBottom="true"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/medium"
+                    android:layout_toRightOf="@+id/large"
+                    android:layout_alignParentBottom="true"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/small"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/medium"/>
+
+            </RelativeLayout>
+
+
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#e1e1e1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@+id/sizeimg"/>
+
+            <!--************************ Workday ************************-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Workday"
+                android:textSize="18sp"
+                android:layout_below="@+id/sizeimg"
+                android:id="@+id/workday"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="Mon,Tue,Wed"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/workday"
+                android:id="@+id/workdaytv"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#e1e1e1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@+id/workdaytv"/>
+
+            <!--************************ Price/Day ************************-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price/Day"
+                android:textSize="18sp"
+                android:id="@+id/price"
+                android:layout_below="@+id/workdaytv"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="300Bath"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/price"
+                android:id="@+id/pricetv"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#e1e1e1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@+id/pricetv"/>
+
+            <!--************************ Contact ************************-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/pricetv"
+                android:id="@+id/re1">
+
+                <ImageButton
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:id="@+id/phone"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:onClick="onClickPhone"
+                    android:background="@drawable/ic_phone" />
+
+                <ImageButton
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_toRightOf="@+id/phone"
+                    android:id="@+id/website"
+                    android:onClick="onClickWebsite"
+                    android:background="@drawable/ic_website"/>
+
+                <ImageButton
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_toRightOf="@+id/website"
+                    android:id="@+id/facebook"
+                    android:onClick="onClickFacebook"
+                    android:background="@drawable/ic_facebook" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/line"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_toRightOf="@+id/facebook"
+                    android:onClick="onClickLine"
+                    android:background="@drawable/ic_line" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_toRightOf="@+id/line"
+                    android:id="@+id/instagram"
+                    android:onClick="onClickInstagram"
+                    android:background="@drawable/ic_instagram"  />
+
+
+
+
+            </RelativeLayout>
+
+            <fragment
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@id/re1"
+                class="com.google.android.gms.maps.MapFragment" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#c9c9c9"/>
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:background="#C2185B">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bookbt"
+            android:layout_centerHorizontal="true"
+            android:background="#f4f4f4"
+            android:text="Book now"
+            android:onClick="onClickBook" />
+
+    </RelativeLayout>
+
+
+
 
 </RelativeLayout>
