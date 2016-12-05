@@ -1,8 +1,11 @@
 package com.example.petpository_v1;
 
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,11 +71,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-
-        //Set action to signin with google button
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_WIDE);
 
     }
 
@@ -90,6 +89,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -111,6 +111,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
     public void signInAnonymous(View view) {
         mAuth.signInAnonymously()
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInAnonymously:onComplete:" + task.isSuccessful());
@@ -134,6 +135,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
@@ -151,9 +153,10 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void updateUI(boolean signedIn) {
         if (signedIn) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
             finish();
         } else {
             Toast.makeText(this, "Sign In failed", Toast.LENGTH_SHORT).show();
