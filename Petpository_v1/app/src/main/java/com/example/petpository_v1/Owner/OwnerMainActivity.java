@@ -1,10 +1,12 @@
 package com.example.petpository_v1.Owner;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
@@ -20,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.security.acl.Owner;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +32,14 @@ public class OwnerMainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PlaceRecyclerAdapter placeAdapter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_main);
-        setTitle("All Places");
+        setTitle(null);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         getPlaceList();
 
@@ -49,9 +51,6 @@ public class OwnerMainActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-
-        Log.d("d;lk;lsdkfl;ksdlf", placeList.size() + "");
 
         placeAdapter = new PlaceRecyclerAdapter(OwnerMainActivity.this, placeList);
         recyclerView.setAdapter(placeAdapter);

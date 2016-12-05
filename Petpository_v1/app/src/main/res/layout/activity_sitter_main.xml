@@ -11,11 +11,7 @@
     android:orientation="vertical"
     tools:context="com.example.petpository_v1.Sitter.SitterMainActivity">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="profile"
-        android:onClick="profileMenu"/>
+    <include layout="@layout/custom_toolbar"></include>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
