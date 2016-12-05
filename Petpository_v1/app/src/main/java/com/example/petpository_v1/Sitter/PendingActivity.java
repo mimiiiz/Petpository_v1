@@ -68,6 +68,7 @@ public class PendingActivity extends AppCompatActivity {
         tv_requestStartDate.setText(requestPetObj.getRequestStartDate());
         tv_requestEndDate.setText(requestPetObj.getRequestEndDate());
 
+        //get pet img
         mStorage = FirebaseStorage.getInstance();
         StorageReference storageRef = mStorage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
         storageRef.child(petObj.getPetID()+"/1").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -81,6 +82,23 @@ public class PendingActivity extends AppCompatActivity {
                 Log.e("Slid", exception.getMessage());
             }
         });
+
+        //get owner email
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query mQ = mDatabase.child("Users").child(requestPetObj.getRequestUID_owner()).child("email");
+        mQ.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tv_requestOwnerEmail.setText(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
 
     }
