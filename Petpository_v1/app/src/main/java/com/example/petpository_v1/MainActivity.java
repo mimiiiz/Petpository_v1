@@ -43,13 +43,14 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("mode", "Owner");
         editor.commit();
         startActivity(new Intent(this, OwnerMainActivity.class));
-
+        finish();
     }
 
     public void enterAsSitter(View view){
         editor.putString("mode", "Sitter");
         editor.commit();
         startActivity(new Intent(this, SitterMainActivity.class));
+        finish();
     }
 
     @Override
@@ -59,8 +60,10 @@ public class MainActivity extends AppCompatActivity {
         if (mode != null) {
             if (mode.equals("Owner")) {
                 startActivity(new Intent(this, OwnerMainActivity.class));
+                finish();
             } else if (mode.equals("Sitter")) {
                 startActivity(new Intent(this, SitterMainActivity.class));
+                finish();
             }
         }
     }
