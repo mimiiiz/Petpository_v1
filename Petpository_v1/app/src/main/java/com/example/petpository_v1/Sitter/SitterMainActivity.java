@@ -43,7 +43,11 @@ public class SitterMainActivity extends AppCompatActivity {
 
         setTitle("My Places");
 
-        uId = "Kim123";
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            uId = user.getUid();
+            Log.d("Uiddddd>>>>>>>>>>>>>>", uId);
+        }
 
         getMyPlaces();
 
@@ -57,19 +61,7 @@ public class SitterMainActivity extends AppCompatActivity {
         myPlaceAdapterRecycler = new MyPlaceAdapterRecycler(getApplicationContext(), places);
         recyclerView.setAdapter(myPlaceAdapterRecycler);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            String uid = user.getUid();
-            Log.d("UID", uid);
-        }
     }
 
     private void getMyPlaces() {
