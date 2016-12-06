@@ -27,7 +27,8 @@
                 android:id="@+id/placeImageViewer" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -36,15 +37,23 @@
                     android:textSize="16dp"
                     android:layout_margin="16dp"/>
 
-                <!--<TextView-->
-                    <!--android:layout_width=""-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:background="@color/colorAccent"
+                    android:textColor="@color/cardview_light_background"
+                    android:id="@+id/notiRequestPending"
+                    android:layout_margin="16dp"
+                    android:padding="8dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/iii" />
+                    android:id="@+id/iii"
+                    android:textSize="14dp"
+                    android:textColor="@color/cardview_light_background"
+                    android:layout_margin="16dp"/>
 
             </LinearLayout>
 

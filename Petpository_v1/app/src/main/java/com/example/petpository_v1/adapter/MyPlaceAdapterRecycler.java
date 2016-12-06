@@ -15,9 +15,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.petpository_v1.Model.Place;
+import com.example.petpository_v1.Model.RequestPet;
 import com.example.petpository_v1.R;
 import com.example.petpository_v1.Sitter.PendingActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -32,6 +38,7 @@ public class MyPlaceAdapterRecycler extends RecyclerView.Adapter<MyPlaceAdapterR
 
     Context mContext;
     ArrayList<Place> places;
+    ArrayList<RequestPet> requestPets;
 
     public MyPlaceAdapterRecycler(Context context, ArrayList<Place> places) {
         this.mContext = context;
@@ -42,12 +49,14 @@ public class MyPlaceAdapterRecycler extends RecyclerView.Adapter<MyPlaceAdapterR
         private CardView cardView;
         private ImageView placeImageViewer;
         private TextView placeNameLabel;
+        private TextView notiTextView;
 
         public ViewHolder(View view) {
             super(view);
             cardView = (CardView) view.findViewById(R.id.placeCardView);
             placeImageViewer = (ImageView) view.findViewById(R.id.placeImageViewer);
             placeNameLabel = (TextView) view.findViewById(R.id.placeNameLabel);
+            notiTextView = (TextView) view.findViewById(R.id.notiRequestPending);
         }
     }
 
@@ -83,10 +92,48 @@ public class MyPlaceAdapterRecycler extends RecyclerView.Adapter<MyPlaceAdapterR
                 Toast.makeText(mContext, places.get(position).getPlaceName(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        findNotiNumber(holder, position);
+
+
+
     }
 
     @Override
     public int getItemCount() {
         return places.size();
+    }
+
+    public void findNotiNumber(final ViewHolder holder, final int position){
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+        requestPets = new ArrayList<>();
+        databaseReference.child("RequestPet").orderByChild("requestPlaceID")
+                .equalTo(places.get(position).getPlaceId())
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                holder.notiTextView.setText(dataSnapshot.getChildrenCount() + " pending requests");
+                for (DataSnapshot requestData : dataSnapshot.getChildren()){
+                    RequestPet requestPet = requestData.getValue(RequestPet.class);
+                    Log.d("requestPet>>>>>", requestPet.getRequestStatus());
+                    if(requestPet.getRequestStatus().equals("pending")){
+                        requestPets.add(requestPet);
+                    }
+                }
+                if (requestPets.size() == 0){
+                    holder.notiTextView.setVisibility(View.GONE);
+                }else {
+                    holder.notiTextView.setVisibility(View.VISIBLE);
+                    holder.notiTextView.setText(requestPets.size() + " pending requests");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
