@@ -89,7 +89,7 @@ public class AddPet1Activity extends AppCompatActivity {
 
         keyGenPetID = mDatabase.child("Owner").child(owner_UID).child("Pet").push().getKey();
         Pet = new Pet();
-        mDatabase.child("Owner").child(owner_UID).child("Pet").child(keyGenPetID).setValue(Pet);
+//        mDatabase.child("Owner").child(owner_UID).child("Pet").child(keyGenPetID).setValue(Pet);
 
         et_petName = (EditText) findViewById(R.id.et_petName);
         petName = et_petName.getText().toString();
