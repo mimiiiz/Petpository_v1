@@ -85,7 +85,6 @@ public class MyPetsActivity extends AppCompatActivity {
                 for (DataSnapshot dtSnapshot : dataSnapshot.getChildren()){
                     Pet pet = dtSnapshot.getValue(Pet.class);
                     myPetList.add(pet);
-                    Log.d("petSnapshot", pet.getPetName());
                 }
                 if (myPetList.size() > 0){
                     mAdapter = new PetListRecycleAdapter(myPetList,MyPetsActivity.this);

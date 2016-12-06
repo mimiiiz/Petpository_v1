@@ -130,7 +130,6 @@ public class OwnerMainActivity extends AppCompatActivity implements GoogleApiCli
 //                List<Place> tempPlace = new ArrayList<Place>();
                 for (DataSnapshot placeSnapshot: dataSnapshot.getChildren()){
                     Place place = placeSnapshot.getValue(Place.class);
-                    Log.d("key", placeSnapshot.toString());
                     place.setPlaceId(placeSnapshot.getKey());
                     placeList.add(place);
                 }
@@ -138,7 +137,6 @@ public class OwnerMainActivity extends AppCompatActivity implements GoogleApiCli
                 recyclerView.setAdapter(placeAdapter);
 
 //                placeList.addAll(tempPlace);
-                Log.d("sizeee", placeList.size() +"");
                 setDistance();
                 placeAdapter.notifyDataSetChanged();
             }
@@ -161,7 +159,6 @@ public class OwnerMainActivity extends AppCompatActivity implements GoogleApiCli
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("STOP", "STOP");
 
         if (mGoogleApiClient.isConnected()) {
             Log.d("discon", "discon");

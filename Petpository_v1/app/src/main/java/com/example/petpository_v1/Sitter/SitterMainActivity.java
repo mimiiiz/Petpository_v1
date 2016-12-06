@@ -52,7 +52,6 @@ public class SitterMainActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             uId = user.getUid();
-            Log.d("Uiddddd>>>>>>>>>>>>>>", uId);
         }
 
         getMyPlaces();

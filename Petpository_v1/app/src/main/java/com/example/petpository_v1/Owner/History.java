@@ -66,6 +66,7 @@ public class History extends AppCompatActivity {
         super.onStart();
         reference = FirebaseDatabase.getInstance().getReference();
         requestRef = reference.child("RequestPet");
+        requestRef.limitToLast(50);
         user = FirebaseAuth.getInstance().getCurrentUser();
         listener = new ValueEventListener() {
             @Override
@@ -76,7 +77,6 @@ public class History extends AppCompatActivity {
                     if(request.getRequestUID_owner().equals(user.getUid())){
                         historyList.add(request);
                     }
-                    Log.d("historyLog Size", historyList.size()+"");
                 }
                 mAdapter = new HistoryRecycleAdapter(historyList, History.this, user.getUid());
                 mRecyclerView.setAdapter(mAdapter);

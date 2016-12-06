@@ -287,7 +287,6 @@ public class AddPet1Activity extends AppCompatActivity {
         for (int i = 0; i < images.size(); i++) {
             Log.i("pathhhhhhhhhhh", images.get(i).path);
             file = Uri.fromFile(new File(images.get(i).path));
-            Log.d("nn", file.getPath());
             StorageReference imgRef = storageRef.child("Owner/" + owner_UID + "/" + fileName + "/" + i);
             UploadTask uploadTask = imgRef.putFile(file);
             // Register observers to listen for when the download is done or if it fails
@@ -295,14 +294,12 @@ public class AddPet1Activity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
                     // Handle unsuccessful uploads
-                    Log.d("FAIL", exception.getMessage());
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    Log.d("NOT FAIL", "FAAAAAAAAAAAAAAAAAAAAAAAFF");
                 }
             });
         }
@@ -311,7 +308,6 @@ public class AddPet1Activity extends AppCompatActivity {
 
         Glide.with(getApplicationContext()).load(file).fitCenter().centerCrop().into(imgv_petPhoto);
         imgv_petPhoto.setVisibility(View.VISIBLE);
-        Log.d("is shown2 ?", (imgv_petPhoto.getVisibility() == View.VISIBLE) + "");
     }
 
     @Override

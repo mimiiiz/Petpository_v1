@@ -74,7 +74,6 @@ public class RecentRequestAdapter extends RecyclerView.Adapter<RecentRequestAdap
 
         @Override
         public void onClick(View v) {
-            Log.d("click", getAdapterPosition()+"");
             if (listener != null) {
                 listener.onClick(getAdapterPosition());
             }

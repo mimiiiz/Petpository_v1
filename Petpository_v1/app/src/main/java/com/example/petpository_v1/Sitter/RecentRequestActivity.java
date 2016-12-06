@@ -106,12 +106,10 @@ public class RecentRequestActivity extends AppCompatActivity implements RecentRe
                 requests.clear();
                 for (DataSnapshot requestSnapshot: dataSnapshot.getChildren()){
                     RequestPet request = requestSnapshot.getValue(RequestPet.class);
-                    Log.d("request", request.getRequestStatus());
                     if(request.getRequestStatus().equals("accept")){
                         requests.add(request);
                     }
                 }
-                Log.d("aaaa", requests.size() + "");
                 adapter.notifyDataSetChanged();
                 hideProgressDialog();
                 if(requests.size() == 0){
@@ -129,7 +127,6 @@ public class RecentRequestActivity extends AppCompatActivity implements RecentRe
 
     @Override
     public void onClick(final int position) {
-        Log.d("aaaa", "aaaaa");
         final Dialog dialog = new Dialog(RecentRequestActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.recentpet_dialog);
