@@ -74,6 +74,7 @@ public class SitterMainActivity extends AppCompatActivity {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                places.clear();
                 for (DataSnapshot placeSnapshot : dataSnapshot.getChildren()) {
                     Log.d("ddddddd", dataSnapshot.toString());
                     Place place = placeSnapshot.getValue(Place.class);
