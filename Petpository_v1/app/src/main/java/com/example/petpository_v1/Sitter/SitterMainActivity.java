@@ -45,7 +45,9 @@ public class SitterMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sitter_main);
 
-        setTitle("My Places");
+        TextView title = (TextView) findViewById(R.id.page_title);
+        title.setText("My Place");
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {

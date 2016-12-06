@@ -50,7 +50,16 @@ public class RecentRequestActivity extends AppCompatActivity implements RecentRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recent_request);
-        setTitle("All Accepted Request");
+        TextView title = (TextView) findViewById(R.id.page_title);
+        title.setText("All Accepted Request");
+
+        findViewById(R.id.back_arrow_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
         Intent intent = getIntent();
         placeId = intent.getStringExtra("placeId");
