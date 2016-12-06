@@ -1,10 +1,12 @@
 package com.example.petpository_v1.Sitter;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,13 +59,13 @@ public class PendingActivity extends AppCompatActivity {
 
     }
 
-    protected void setTextView(RequestPet requestPetObj){
+    protected void setTextView(RequestPet requestPetObj) {
 
         dialog = new Dialog(PendingActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.pending_dialog);
 
-        imgv_petPic = (ImageView)dialog.findViewById(R.id.imgv_petRequest);
+        imgv_petPic = (ImageView) dialog.findViewById(R.id.imgv_petRequest);
         tv_requestPetName = (TextView) dialog.findViewById(R.id.tv_requestPetName);
         tv_requestPetSize = (TextView) dialog.findViewById(R.id.tv_requestPetSize);
         tv_requestPetType = (TextView) dialog.findViewById(R.id.tv_requestPetType);
@@ -78,12 +80,12 @@ public class PendingActivity extends AppCompatActivity {
         tv_requestStartDate.setText(requestPetObj.getRequestStartDate());
         tv_requestEndDate.setText(requestPetObj.getRequestEndDate());
 
-        Button acceptbt = (Button)dialog.findViewById(R.id.btn_accept);
+        Button acceptbt = (Button) dialog.findViewById(R.id.btn_accept);
         acceptbt.setTextColor(Color.parseColor("#ffffff"));
-        Button declinebt = (Button)dialog.findViewById(R.id.btn_denied);
+        Button declinebt = (Button) dialog.findViewById(R.id.btn_denied);
         declinebt.setTextColor(Color.parseColor("#ffffff"));
 
-        TextView closebt = (TextView)dialog.findViewById(R.id.skip);
+        TextView closebt = (TextView) dialog.findViewById(R.id.skip);
         closebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,11 +97,10 @@ public class PendingActivity extends AppCompatActivity {
         });
 
 
-
         //get pet img
         mStorage = FirebaseStorage.getInstance();
         StorageReference storageRef = mStorage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
-        storageRef.child("Owner/"+requestPetObj.getRequestUID_owner() +"/" + petObj.getPetID()+"/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageRef.child("Owner/" + requestPetObj.getRequestUID_owner() + "/" + petObj.getPetID() + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(getApplicationContext()).load(uri).fitCenter().centerCrop().into(imgv_petPic);
@@ -132,25 +133,59 @@ public class PendingActivity extends AppCompatActivity {
 
     }
 
-    public void sentApprove(View view){
-        switch (view.getId()){
+    public void sentApprove(View view) {
+        switch (view.getId()) {
             case R.id.btn_accept:
-                mDatabase = FirebaseDatabase.getInstance().getReference();
-                requestPetObj.setRequestStatus("accept");
-                mDatabase.child("RequestPet").child(requestPetObj.getRequestID()).child("requestStatus").setValue(requestPetObj.getRequestStatus());
-                mDatabase.child("Sitter").child(requestPetObj.getRequestPlaceID()).child("Client").child(requestPetObj.getRequestID()).setValue(requestPetObj);
-                Toast.makeText(this, "Accepted !!", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder acceptDialog = new AlertDialog.Builder(PendingActivity.this);
+                acceptDialog.setTitle("Please confirm");
+                acceptDialog.setMessage("Confirm accept ?");
+                acceptDialog.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mDatabase = FirebaseDatabase.getInstance().getReference();
+                        requestPetObj.setRequestStatus("accept");
+                        mDatabase.child("RequestPet").child(requestPetObj.getRequestID()).child("requestStatus").setValue(requestPetObj.getRequestStatus());
+                        mDatabase.child("Sitter").child(requestPetObj.getRequestPlaceID()).child("Client").child(requestPetObj.getRequestID()).setValue(requestPetObj);
+                        Toast.makeText(PendingActivity.this, "Accepted !!", Toast.LENGTH_SHORT).show();
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                acceptDialog.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                acceptDialog.show();
                 break;
             case R.id.btn_denied:
-                requestPetObj.setRequestStatus("denied");
-                mDatabase.child("RequestPet").child(requestPetObj.getRequestID()).child("requestStatus").setValue(requestPetObj.getRequestStatus());
-                Toast.makeText(this, "Denied", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder deniedDialog = new AlertDialog.Builder(PendingActivity.this);
+                deniedDialog.setTitle("Please confirm");
+                deniedDialog.setMessage("Confirm denide ?");
+                deniedDialog.setPositiveButton("Denide", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        requestPetObj.setRequestStatus("denied");
+                        mDatabase.child("RequestPet").child(requestPetObj.getRequestID()).child("requestStatus").setValue(requestPetObj.getRequestStatus());
+                        Toast.makeText(PendingActivity.this, "Denied", Toast.LENGTH_SHORT).show();
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                deniedDialog.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                deniedDialog.show();
                 break;
         }
 
     }
 
-    public void createRequestPet(){
+    public void createRequestPet() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Query mQ = mDatabase.child("RequestPet").orderByChild("requestTimeStamp");
         mQ.addValueEventListener(new ValueEventListener() {
@@ -172,13 +207,13 @@ public class PendingActivity extends AppCompatActivity {
 
                 Log.d("size >>> ...", requestPetsArray.size() + " .............");
 
-                if (requestPetsArray.size() != 0){
-                    for (RequestPet reqPet : requestPetsArray){
-                        Log.d("a",">>>>>>>>>>>>>array");
+                if (requestPetsArray.size() != 0) {
+                    for (RequestPet reqPet : requestPetsArray) {
+                        Log.d("a", ">>>>>>>>>>>>>array");
                         setTextView(reqPet);
                     }
 
-                }else {
+                } else {
                     Intent intentToRecentReq = new Intent(PendingActivity.this, RecentRequestActivity.class);
                     intentToRecentReq.putExtra("placeId", requestPlaceId);
                     startActivity(intentToRecentReq);
