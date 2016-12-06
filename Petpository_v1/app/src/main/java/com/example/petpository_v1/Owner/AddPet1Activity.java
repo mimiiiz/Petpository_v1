@@ -29,6 +29,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -52,12 +55,14 @@ public class AddPet1Activity extends AppCompatActivity {
     private String size = "";
     private ArrayList<Image> imagesPet1;
     private DatabaseReference mDatabase;
+    private DatabaseReference myPetRef;
     private FirebaseStorage storage;
     private StorageReference storageRef;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private Integer check_enableBtn_name = 0, check_enableBtn_type = 0;
     private Uri file;
+    private ChildEventListener childEventListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,11 +163,40 @@ public class AddPet1Activity extends AppCompatActivity {
 
                 Intent intent = new Intent(AddPet1Activity.this, MyPetsActivity.class);
                 Toast.makeText(AddPet1Activity.this, "Add pet success !", Toast.LENGTH_SHORT).show();
+
+                childEventListener = new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        finish();
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                };
+
+                myPetRef = mDatabase.child("Owner").child(owner_UID).child("Pet").child(keyGenPetID);
+                myPetRef.addChildEventListener(childEventListener);
                 startActivity(intent);
             }
         });
     }
-
 
     public void selectedSize(View view) {
         imgBtn_small = (ImageButton) findViewById(R.id.imgBtn_small);
@@ -242,5 +276,13 @@ public class AddPet1Activity extends AppCompatActivity {
         imgv_petPhoto = (ImageView) findViewById(R.id.imgv_petPhoto);
         Glide.with(getApplicationContext()).load(file).fitCenter().centerCrop().into(imgv_petPhoto);
         imgv_petPhoto.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(childEventListener!=null){
+            myPetRef.removeEventListener(childEventListener);
+        }
     }
 }
