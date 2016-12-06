@@ -71,7 +71,7 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceRecyclerAdap
         //Glide.with(mContext).load(placeList.get(position).getPlacePhoto().get(0)).fitCenter().centerCrop().into(holder.placeImage);
         holder.placeNameLabel.setText(placeList.get(position).getPlaceName());
         holder.placeWorkDayLabel.setText(placeList.get(position).getPlaceDogNum() + " ตัว");
-        holder.placePriceLabel.setText(String.format("%.2f บาท", placeList.get(position).getPlacePrice()));
+        holder.placePriceLabel.setText(String.format("%.2f บาท/วัน", placeList.get(position).getPlacePrice()));
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
