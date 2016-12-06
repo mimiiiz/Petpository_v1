@@ -71,7 +71,7 @@ public class PlaceDetailActivity extends AppCompatActivity implements OnMapReady
         //setText to TextView
         name.setText(placeName);
         detail.setText(placeDetail);
-        price.setText(placePrice+" Baht/Hour");
+        price.setText(placePrice+" Baht/Day");
         workday.setText(placeWorkDay);
 
         largeImg  = (ImageView)findViewById(R.id.large);
