@@ -19,6 +19,7 @@ import com.example.petpository_v1.Model.Pet;
 import com.example.petpository_v1.Model.RequestPet;
 import com.example.petpository_v1.Owner.SentRequestActivity;
 import com.example.petpository_v1.R;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -112,9 +113,9 @@ public class HistoryRecycleAdapter extends RecyclerView.Adapter<HistoryRecycleAd
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
         String petId = pet.getPetID() + "/0";
-        StorageReference imageRef = storageRef.child("Owner").child(uid).child(petId);
-        Log.d("imageRef", imageRef.toString());
-        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+        StorageReference petImageRef = storageRef.child("Owner").child(uid).child(petId);
+        petImageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(context)
@@ -130,6 +131,14 @@ public class HistoryRecycleAdapter extends RecyclerView.Adapter<HistoryRecycleAd
                 holder.petImage.setImageResource(R.drawable.refresh);
             }
         });
+
+        StorageReference placeImageRef = storageRef.child("Place").child(historyList.get(position).getRequestPlaceID()+"/0");
+        Glide.with(context).using(new FirebaseImageLoader())
+                .load(placeImageRef)
+                .fitCenter()
+                .centerCrop()
+                .bitmapTransform(new CropCircleTransformation(context))
+                .into(holder.placeImage);
     }
 
 

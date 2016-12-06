@@ -181,9 +181,8 @@ public class SentRequestActivity extends AppCompatActivity {
                 newRequestPet.setRequestPlaceName(sp.getString("place_name",null));
 
                 requestRef.child(genkey).setValue(newRequestPet);
-                sp.edit().clear();
                 dialogReview.cancel();
-                startActivity(new Intent(SentRequestActivity.this, OwnerMainActivity.class));
+                startActivity(new Intent(SentRequestActivity.this, History.class));
                 finish();
             }
         });

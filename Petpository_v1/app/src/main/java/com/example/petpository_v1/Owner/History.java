@@ -50,12 +50,10 @@ public class History extends AppCompatActivity {
         });
 
         mRecyclerView = (RecyclerView) findViewById(R.id.owner_history_recycle);
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         historyList = new ArrayList();
