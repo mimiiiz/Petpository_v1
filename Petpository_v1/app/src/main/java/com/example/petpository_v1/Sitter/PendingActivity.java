@@ -1,12 +1,17 @@
 package com.example.petpository_v1.Sitter;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +43,7 @@ public class PendingActivity extends AppCompatActivity {
     public ArrayList<RequestPet> requestPetsArray;
     private FirebaseStorage mStorage;
     private ImageView imgv_petPic;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +59,17 @@ public class PendingActivity extends AppCompatActivity {
 
     protected void setTextView(RequestPet requestPetObj){
 
-        imgv_petPic = (ImageView) findViewById(R.id.imgv_petRequest);
-        tv_requestPetName = (TextView) findViewById(R.id.tv_requestPetName);
-        tv_requestPetSize = (TextView) findViewById(R.id.tv_requestPetSize);
-        tv_requestPetType = (TextView) findViewById(R.id.tv_requestPetType);
-        tv_requestOwnerEmail = (TextView) findViewById(R.id.tv_requestOwnerEmail);
-        tv_requestStartDate = (TextView) findViewById(R.id.tv_requestStartDate);
-        tv_requestEndDate = (TextView) findViewById(R.id.tv_requestEndDate);
+        dialog = new Dialog(PendingActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.pending_dialog);
+
+        imgv_petPic = (ImageView)dialog.findViewById(R.id.imgv_petRequest);
+        tv_requestPetName = (TextView) dialog.findViewById(R.id.tv_requestPetName);
+        tv_requestPetSize = (TextView) dialog.findViewById(R.id.tv_requestPetSize);
+        tv_requestPetType = (TextView) dialog.findViewById(R.id.tv_requestPetType);
+        tv_requestOwnerEmail = (TextView) dialog.findViewById(R.id.tv_requestOwnerEmail);
+        tv_requestStartDate = (TextView) dialog.findViewById(R.id.tv_requestStartDate);
+        tv_requestEndDate = (TextView) dialog.findViewById(R.id.tv_requestEndDate);
 
         Pet petObj = requestPetObj.getPet();
         tv_requestPetName.setText(petObj.getPetName());
@@ -68,10 +78,28 @@ public class PendingActivity extends AppCompatActivity {
         tv_requestStartDate.setText(requestPetObj.getRequestStartDate());
         tv_requestEndDate.setText(requestPetObj.getRequestEndDate());
 
+        Button acceptbt = (Button)dialog.findViewById(R.id.btn_accept);
+        acceptbt.setTextColor(Color.parseColor("#ffffff"));
+        Button declinebt = (Button)dialog.findViewById(R.id.btn_denied);
+        declinebt.setTextColor(Color.parseColor("#ffffff"));
+
+        TextView closebt = (TextView)dialog.findViewById(R.id.skip);
+        closebt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Intent intentToRecentReq = new Intent(PendingActivity.this, RecentRequestActivity.class);
+                startActivity(intentToRecentReq);
+                finish();
+            }
+        });
+
+
+
         //get pet img
         mStorage = FirebaseStorage.getInstance();
         StorageReference storageRef = mStorage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
-        storageRef.child(petObj.getPetID()+"/1").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageRef.child("Owner/"+requestPetObj.getRequestUID_owner() +"/" + petObj.getPetID()+"/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(getApplicationContext()).load(uri).fitCenter().centerCrop().into(imgv_petPic);
@@ -85,7 +113,7 @@ public class PendingActivity extends AppCompatActivity {
 
         //get owner email
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query mQ = mDatabase.child("Users").child(requestPetObj.getRequestUID_owner()).child("email");
+        Query mQ = mDatabase.child("Users").child(requestPetObj.getRequestUID_owner()).child("name");
         mQ.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -97,8 +125,9 @@ public class PendingActivity extends AppCompatActivity {
 
             }
         });
-
-
+        dialog.setTitle(null);
+        dialog.setCancelable(false);
+        dialog.show();
 
 
     }
@@ -145,6 +174,7 @@ public class PendingActivity extends AppCompatActivity {
 
                 if (requestPetsArray.size() != 0){
                     for (RequestPet reqPet : requestPetsArray){
+                        Log.d("a",">>>>>>>>>>>>>array");
                         setTextView(reqPet);
                     }
 
