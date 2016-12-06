@@ -39,6 +39,7 @@ public class Add2PlaceActivity extends AppCompatActivity {
         keyGen = intent.getStringExtra("keygen");
 
         backoneBt = (Button)findViewById(R.id.backtoone);
+        backoneBt.setText("< BACK");
         nextthreeBt = (Button)findViewById(R.id.nexttothree);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -73,17 +74,24 @@ public class Add2PlaceActivity extends AppCompatActivity {
                 priceStr = et_startPrice.getText().toString();
 
                 if (dognumStr != null && priceStr != null){
-
                     dogNum = Integer.parseInt(dognumStr);
                     priceStart = Double.parseDouble(priceStr);
-                    placeObj.setPlaceDogNum(dogNum);
-                    placeObj.setPlacePrice(priceStart);
-                    placeObj.setPlaceWorkDay(checkWorkday());
-                    placeObj.setPlaceDogSize(checkSize());
+                    if ((dogNum <= 0 && dogNum >1000)||(priceStart <= 0 && priceStart > 50000)){
+                        if (dogNum <= 0 && dogNum >1000) {
+                            Toast.makeText(Add2PlaceActivity.this, "Max number of dog must be between 1-1,000", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(Add2PlaceActivity.this, "Price must be between 1-50,000 baht", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        placeObj.setPlaceDogNum(dogNum);
+                        placeObj.setPlacePrice(priceStart);
+                        placeObj.setPlaceWorkDay(checkWorkday());
+                        placeObj.setPlaceDogSize(checkSize());
 
-                    intent.putExtra("numpricedaysize", placeObj);
-                    intent.putExtra("KeyGen", keyGen);
-                    startActivity(intent);
+                        intent.putExtra("numpricedaysize", placeObj);
+                        intent.putExtra("KeyGen", keyGen);
+                        startActivity(intent);
+                    }
                 }else{
                     Toast.makeText(Add2PlaceActivity.this, "Please fill information", Toast.LENGTH_SHORT).show();
                 }

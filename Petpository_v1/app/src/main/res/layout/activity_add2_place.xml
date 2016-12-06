@@ -4,149 +4,182 @@
     android:id="@+id/activity_add2_place2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.petpository_v1.Sitter.Add2PlaceActivity">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/progresstwo"
-        android:id="@+id/progressthree"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Max Dog Number"
-        android:textSize="18dp"
-        android:id="@+id/dognumtag"
-        android:layout_below="@+id/progressthree"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp" />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/dognum"
-        android:layout_below="@+id/dognumtag"
-        android:layout_marginLeft="15dp"
-        android:width="300dp"
-        android:maxLines="1"
-        android:inputType="number"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start Price"
-        android:textSize="18dp"
-        android:id="@+id/pricetag"
-        android:layout_marginLeft="15dp"
-        android:layout_below="@+id/dognum"/>
-    <EditText
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/progresstwo"
+                android:id="@+id/progressthree"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max number of dog"
+                android:textSize="18dp"
+                android:id="@+id/dognumtag"
+                android:layout_below="@+id/progressthree"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dognum"
+                android:layout_below="@+id/dognumtag"
+                android:layout_marginLeft="15dp"
+                android:width="300dp"
+                android:maxLines="1"
+                android:inputType="number"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Price/Day"
+                android:textSize="18dp"
+                android:id="@+id/pricetag"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/dognum"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/price"
+                android:hint="xxx (Baht/Day)"
+                android:layout_below="@+id/pricetag"
+                android:layout_marginLeft="15dp"
+                android:maxLines="1"
+                android:inputType="number"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dog Size(sizedog)"
+                android:textSize="18dp"
+                android:id="@+id/dogsizetag"
+                android:layout_below="@+id/price"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/small"
+                android:text="Small"
+                android:layout_below="@+id/dogsizetag"
+                android:layout_marginLeft="20dp" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/medium"
+                android:text="Medium"
+                android:layout_alignBottom="@+id/small"
+                android:layout_toRightOf="@+id/small"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/large"
+                android:text="Large"
+                android:layout_alignBottom="@+id/medium"
+                android:layout_toRightOf="@+id/medium" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Work Day"
+                android:textSize="18dp"
+                android:id="@+id/worktag"
+                android:layout_below="@id/small"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mon"
+                android:text="Mon"
+                android:layout_below="@+id/worktag"
+                android:layout_marginLeft="20dp" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tue"
+                android:text="Tue"
+                android:layout_alignBottom="@+id/mon"
+                android:layout_toRightOf="@+id/mon"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wed"
+                android:text="Wed"
+                android:layout_alignBottom="@+id/tue"
+                android:layout_toRightOf="@+id/tue" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/thu"
+                android:text="Thu"
+                android:layout_alignBottom="@+id/wed"
+                android:layout_toRightOf="@+id/wed" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mon"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/fri"
+                android:text="Fri" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sat"
+                android:text="Sat"
+                android:layout_below="@+id/tue"
+                android:layout_alignLeft="@+id/tue" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sun"
+                android:text="Sun"
+                android:layout_below="@+id/wed"
+                android:layout_alignLeft="@+id/wed"
+                android:layout_marginBottom="20dp"/>
+            </RelativeLayout>
+    </ScrollView>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/price"
-        android:hint="xxx (baht/hr.)"
-        android:layout_below="@+id/pricetag"
-        android:layout_marginLeft="15dp"
-        android:maxLines="1"
-        android:inputType="number"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dog Size(sizedog)"
-        android:textSize="18dp"
-        android:id="@+id/dogsizetag"
-        android:layout_below="@+id/price"
-        android:layout_marginLeft="15dp"/>
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/small"
-        android:text="Small"
-        android:layout_below="@+id/dogsizetag"
-        android:layout_marginLeft="20dp" />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/medium"
-        android:text="Medium"
-        android:layout_alignBottom="@+id/small"
-        android:layout_toRightOf="@+id/small"/>
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/large"
-        android:text="Large"
-        android:layout_alignBottom="@+id/medium"
-        android:layout_toRightOf="@+id/medium" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Work Day"
-        android:textSize="18dp"
-        android:id="@+id/worktag"
-        android:layout_below="@id/small"
-        android:layout_marginLeft="15dp"/>
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mon"
-        android:text="Mon"
-        android:layout_below="@+id/worktag"
-        android:layout_marginLeft="20dp" />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tue"
-        android:text="Tue"
-        android:layout_alignBottom="@+id/mon"
-        android:layout_toRightOf="@+id/mon"/>
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/wed"
-        android:text="Wed"
-        android:layout_alignBottom="@+id/tue"
-        android:layout_toRightOf="@+id/tue" />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/thu"
-        android:text="Thu"
-        android:layout_alignBottom="@+id/wed"
-        android:layout_toRightOf="@+id/wed" />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mon"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/fri"
-        android:text="Fri" />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sat"
-        android:text="Sat"
-        android:layout_below="@+id/tue"
-        android:layout_alignLeft="@+id/tue" />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sun"
-        android:text="Sun"
-        android:layout_below="@+id/wed"
-        android:layout_alignLeft="@+id/wed"
-        android:layout_marginBottom="20dp"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back"
-        android:id="@+id/backtoone"
-        android:layout_alignParentBottom="true" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="next"
-        android:id="@+id/nexttothree"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:background="#E91E63">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/backtoone"
+            android:background="@drawable/button_custom"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:text=" Back" />
+
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:background="#E91E63">
+            </RelativeLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="next >"
+            android:id="@+id/nexttothree"
+            android:background="@drawable/button_custom"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
+    </LinearLayout>
 </RelativeLayout>
