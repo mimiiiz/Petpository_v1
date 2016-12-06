@@ -49,10 +49,8 @@ public class PendingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pending);
         setTitle("Pending Request");
 
-//        Intent intent = getIntent();
-//        requestPlaceId = intent.getStringExtra("placeId");
-        requestPlaceId = "123";
-
+        Intent intent = getIntent();
+        requestPlaceId = intent.getStringExtra("placeId");
 
         createRequestPet();
 
@@ -87,7 +85,7 @@ public class PendingActivity extends AppCompatActivity {
         //get pet img
         mStorage = FirebaseStorage.getInstance();
         StorageReference storageRef = mStorage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
-        storageRef.child(petObj.getPetID()+"/1").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageRef.child("Owner/"+requestPetObj.getRequestUID_owner() +"/" + petObj.getPetID()+"/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(getApplicationContext()).load(uri).fitCenter().centerCrop().into(imgv_petPic);
