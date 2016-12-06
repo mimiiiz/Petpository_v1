@@ -45,7 +45,7 @@ public class SlideImageAdapter extends PagerAdapter {
         StorageReference storageRef = storage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
 
 
-        storageRef.child("Sitter/"+placeId +"/"+ (i)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageRef.child("Place/"+placeId +"/"+ (i)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(mContext).load(uri).fitCenter().centerCrop().into(mImageView);

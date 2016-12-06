@@ -71,7 +71,7 @@ public class PlaceDetailActivity extends AppCompatActivity implements OnMapReady
         //setText to TextView
         name.setText(placeName);
         detail.setText(placeDetail);
-        price.setText(placePrice);
+        price.setText(placePrice+" Baht/Hour");
         workday.setText(placeWorkDay);
 
         largeImg  = (ImageView)findViewById(R.id.large);
@@ -128,7 +128,6 @@ public class PlaceDetailActivity extends AppCompatActivity implements OnMapReady
         mMap.addMarker(new MarkerOptions().position(location).title(placeName));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 17));
     }
-
 
     //open dial keypad
     public void onClickPhone(View v){
@@ -192,7 +191,9 @@ public class PlaceDetailActivity extends AppCompatActivity implements OnMapReady
     }
 
     public void onClickBook(View v){
-
+        Intent intent = new Intent(this, ChoosePetActivity.class);
+        intent.putExtra("place", place);
+        startActivity(intent);
     }
 
 
