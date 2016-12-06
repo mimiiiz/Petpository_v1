@@ -55,6 +55,8 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:9.8.0'
     testCompile 'junit:junit:4.12'
 
+    //pick multiple image ..mimi
+    compile 'com.github.darsh2:MultipleImageSelect:3474549'
 
 }
 //init firebase ..mimi
