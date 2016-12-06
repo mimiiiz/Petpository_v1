@@ -15,6 +15,15 @@
         <!--android:layout_marginLeft="20dp"-->
         <!--android:textSize="20sp"-->
         <!--android:textStyle="normal|bold"/>-->
+    <ImageButton
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/x"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="2dp"
+        android:id="@+id/closebt"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -206,10 +215,10 @@
                 android:id="@+id/telowner"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:onClick="onClickTelOwner"
                 android:layout_below="@id/totv"
                 android:layout_toRightOf="@id/teltv"
-
                 android:background="@drawable/ic_phone"/>
         </RelativeLayout>
 
@@ -220,18 +229,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/lin">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/close"
-        android:layout_marginTop="33dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="20dp"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/cardview_light_background"
-        android:text="Close"/>
 </RelativeLayout>
 
 
