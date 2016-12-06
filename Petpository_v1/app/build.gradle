@@ -57,6 +57,8 @@ dependencies {
 
     //pick multiple image ..mimi
     compile 'com.github.darsh2:MultipleImageSelect:3474549'
+    //show image selected
+    compile 'com.firebaseui:firebase-ui-storage:0.6.0'
 
 }
 //init firebase ..mimi

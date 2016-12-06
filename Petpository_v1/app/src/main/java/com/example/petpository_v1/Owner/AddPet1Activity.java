@@ -22,12 +22,16 @@ import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.example.petpository_v1.Model.Pet;
 import com.example.petpository_v1.R;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -53,6 +57,7 @@ public class AddPet1Activity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private Integer check_enableBtn_name = 0, check_enableBtn_type = 0;
+    private Uri file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +94,9 @@ public class AddPet1Activity extends AppCompatActivity {
                 petName = et_petName.getText().toString();
                 if (!petName.equals("")) {
                     check_enableBtn_name = 1;
-                    if (check_enableBtn_name == 1 && check_enableBtn_type == 1){
-                    btn_addPet.setEnabled(true);
-                    }else {
+                    if (check_enableBtn_name == 1 && check_enableBtn_type == 1) {
+                        btn_addPet.setEnabled(true);
+                    } else {
                         btn_addPet.setEnabled(false);
                     }
                 } else {
@@ -104,7 +109,6 @@ public class AddPet1Activity extends AppCompatActivity {
 
             }
         });
-
 
         et_petBreed = (EditText) findViewById(R.id.et_petBreed);
         petType = et_petBreed.getText().toString();
@@ -119,9 +123,9 @@ public class AddPet1Activity extends AppCompatActivity {
                 petType = et_petBreed.getText().toString();
                 if (!petType.equals("")) {
                     check_enableBtn_type = 1;
-                    if (check_enableBtn_name == 1 && check_enableBtn_type == 1){
+                    if (check_enableBtn_name == 1 && check_enableBtn_type == 1) {
                         btn_addPet.setEnabled(true);
-                    }else {
+                    } else {
                         btn_addPet.setEnabled(false);
                     }
                 } else {
@@ -138,17 +142,10 @@ public class AddPet1Activity extends AppCompatActivity {
         btn_addPet = (Button) findViewById(R.id.btn_addPet);
         imagesPet1 = new ArrayList<>();
 
-
-
-
-
-
         btn_addPet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-//                Pet = new Pet();
                 petName = et_petName.getText().toString();
                 et_petBreed = (EditText) findViewById(R.id.et_petBreed);
                 Pet.setPetName(petName);
@@ -203,11 +200,6 @@ public class AddPet1Activity extends AppCompatActivity {
         intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 1);
         startActivityForResult(intent, Constants.REQUEST_CODE);
 
-        /*** set img ***/
-//        imgv_petPhoto = (ImageView) findViewById(R.id.imgv_petPhoto);
-//                imgv_petPhoto
-//                Pet.setPetPhoto();
-
     }
 
     @Override
@@ -217,7 +209,6 @@ public class AddPet1Activity extends AppCompatActivity {
             //The array list has the image paths of the selected images
             imagesPet1 = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
             Toast.makeText(AddPet1Activity.this, "Add Images Successfully", Toast.LENGTH_SHORT).show();
-
             storeImage(keyGenPetID, owner_UID, imagesPet1);
         }
     }
@@ -225,9 +216,9 @@ public class AddPet1Activity extends AppCompatActivity {
     private void storeImage(String fileName, String owner_UID, ArrayList<Image> images) {
         for (int i = 0; i < images.size(); i++) {
             Log.i("pathhhhhhhhhhh", images.get(i).path);
-            Uri file = Uri.fromFile(new File(images.get(i).path));
+            file = Uri.fromFile(new File(images.get(i).path));
             Log.d("nn", file.getPath());
-            StorageReference imgRef = storageRef.child("Owner/"  + owner_UID + "/" + fileName + "/" + i);
+            StorageReference imgRef = storageRef.child("Owner/" + owner_UID + "/" + fileName + "/" + i);
             UploadTask uploadTask = imgRef.putFile(file);
             // Register observers to listen for when the download is done or if it fails
             uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -245,5 +236,10 @@ public class AddPet1Activity extends AppCompatActivity {
                 }
             });
         }
+
+        /*** Set image view ***/
+        imgv_petPhoto = (ImageView) findViewById(R.id.imgv_petPhoto);
+        Glide.with(getApplicationContext()).load(file).fitCenter().centerCrop().into(imgv_petPhoto);
+        imgv_petPhoto.setVisibility(View.VISIBLE);
     }
 }
