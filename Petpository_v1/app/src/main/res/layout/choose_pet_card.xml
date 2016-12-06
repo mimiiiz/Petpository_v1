@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/pet_list_card_view"
     android:layout_width="200dp"
-    android:layout_height="wrap_content"
+    android:layout_height="230dp"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="8dp"
     android:layout_margin="16dp">
@@ -39,8 +39,8 @@
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"/>
         <TextView
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
             android:textAlignment="textEnd"
             android:text="size"
             android:textColor="@color/colorPrimary"

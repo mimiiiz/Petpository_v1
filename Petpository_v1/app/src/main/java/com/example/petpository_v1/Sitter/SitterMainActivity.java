@@ -68,7 +68,6 @@ public class SitterMainActivity extends AppCompatActivity {
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getToken() instead.
             String uid = user.getUid();
-            Log.d("UID", uid);
         }
     }
 
@@ -83,7 +82,6 @@ public class SitterMainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot placeSnapshot : dataSnapshot.getChildren()) {
-                    Log.d("ddddddd", dataSnapshot.toString());
                     Place place = placeSnapshot.getValue(Place.class);
                     place.setPlaceId(placeSnapshot.getKey());
                     places.add(place);

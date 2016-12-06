@@ -43,9 +43,6 @@ public class OwnerMainActivity extends AppCompatActivity {
 
         getPlaceList();
 
-        Log.d("PlaceCardListActivity", "Hi");
-
-
         recyclerView = (RecyclerView) findViewById(R.id.placeRecyClerView);
         recyclerView.setHasFixedSize(true);
 
@@ -63,8 +60,6 @@ public class OwnerMainActivity extends AppCompatActivity {
 
     public void getPlaceList(){
 
-        Log.d("getPlacedList", "HI");
-
         placeList = new ArrayList<>();
 
         FirebaseApp.initializeApp(this);
@@ -81,12 +76,10 @@ public class OwnerMainActivity extends AppCompatActivity {
                 for (DataSnapshot placeSnapshot: dataSnapshot.getChildren()){
                     Place place = new Place();
                     place = placeSnapshot.getValue(Place.class);
-                    Log.d("key", placeSnapshot.toString());
                     place.setPlaceId(placeSnapshot.getKey());
 //                    Log.d("DDD", ">>>>>>>>>>>>>>>>>>"+placeSnapshot.getKey());
 //                    fileName.add(placeSnapshot.getKey());
                     placeList.add(place);
-                    Log.d("ppppppppppppppppppp", placeSnapshot.toString());
                 }
                 placeAdapter.notifyDataSetChanged();
             }

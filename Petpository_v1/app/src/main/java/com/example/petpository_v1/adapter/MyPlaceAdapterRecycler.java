@@ -66,7 +66,6 @@ public class MyPlaceAdapterRecycler extends RecyclerView.Adapter<MyPlaceAdapterR
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference urlReference = storage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
         StorageReference storageReference = urlReference.child(places.get(position).getPlaceId() + "/0");
-        Log.d("Filename----", places.get(position).getPlaceId() + "/0");
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

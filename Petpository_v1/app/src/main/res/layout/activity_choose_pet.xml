@@ -5,19 +5,18 @@
     android:id="@+id/activity_choose_pet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.petpository_v1.Owner.ChoosePetActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorSecondaryText">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Choose your pet first"
         android:textAlignment="center"
-        android:layout_margin="21dp"
-        android:id="@+id/choose_pet_text"/>
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="21dp"
+        android:id="@+id/choose_pet_text"
+        android:textColor="@color/colorTextIcons"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,8 +53,9 @@
             android:layout_height="match_parent"
             android:paddingBottom="60dp"
             android:clipToPadding="false"/>
+
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/send_button"
+            android:id="@+id/add_pet_float_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
@@ -63,7 +63,8 @@
             android:tint="@android:color/background_light"
             app:fabSize="normal"
             app:srcCompat="@drawable/add_icon"
-            android:layout_margin="16dp"/>
+            android:layout_margin="16dp"
+            android:onClick="addPet"/>
     </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

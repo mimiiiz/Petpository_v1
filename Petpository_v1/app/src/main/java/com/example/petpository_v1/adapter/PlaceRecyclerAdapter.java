@@ -37,8 +37,6 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceRecyclerAdap
     public PlaceRecyclerAdapter(Context context, List<Place> placeList){
         this.placeList = placeList;
         this.mContext = context;
-        Log.d("adapter", "yes");
-        Log.d("placeList", placeList.toString());
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -94,7 +92,6 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceRecyclerAdap
             @Override
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
-                Log.d("D>>>>>>>>>>>>>>>>>>>>>>", uri.toString());
                 Glide.with(mContext).load(uri).fitCenter().centerCrop().into(holder.placeImage);
             }
         }).addOnFailureListener(new OnFailureListener() {

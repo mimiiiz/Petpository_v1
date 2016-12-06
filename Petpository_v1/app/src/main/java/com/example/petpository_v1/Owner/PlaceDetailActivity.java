@@ -129,7 +129,6 @@ public class PlaceDetailActivity extends AppCompatActivity implements OnMapReady
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 17));
     }
 
-
     //open dial keypad
     public void onClickPhone(View v){
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
