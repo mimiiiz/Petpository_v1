@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
@@ -36,6 +38,8 @@ public class Add1PlaceActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private ArrayList<Image> images;
     private String keyGen;
+    private Uri file;
+    private ImageView img1, img2, img3, img4, img5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,12 @@ public class Add1PlaceActivity extends AppCompatActivity {
         placeName = (EditText)findViewById(R.id.placename);
         placeAddress = (EditText)findViewById(R.id.address);
         placeDetail = (EditText)findViewById(R.id.detail);
+
+        img1 = (ImageView)findViewById(R.id.img1);
+        img2 = (ImageView)findViewById(R.id.img2);
+        img3 = (ImageView)findViewById(R.id.img3);
+        img4 = (ImageView)findViewById(R.id.img4);
+        img5 = (ImageView)findViewById(R.id.img5);
 
         storage = FirebaseStorage.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -104,6 +114,27 @@ public class Add1PlaceActivity extends AppCompatActivity {
             images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
             Toast.makeText(Add1PlaceActivity.this, "Add Images Successfully", Toast.LENGTH_SHORT).show();
 //            adapter.notifyDataSetChanged();
+
+            for (int i = 0; i < images.size(); i++) {
+                Log.i("pathhhhhhhhhhh", images.get(i).path);
+                file = Uri.fromFile(new File(images.get(i).path));
+                Log.d("nn", file.getPath());
+                if (i == 0) {
+                    Glide.with(getApplicationContext()).load(file).fitCenter().centerCrop().into(img1);
+                }
+                if (i == 1) {
+                    Glide.with(getApplicationContext()).load(file).fitCenter().centerCrop().into(img2);
+                }
+                if (i == 2) {
+                    Glide.with(getApplicationContext()).load(file).fitCenter().centerCrop().into(img3);
+                }
+                if (i == 3) {
+                    Glide.with(getApplicationContext()).load(file).fitCenter().centerCrop().into(img4);
+                }
+                if (i == 4) {
+                    Glide.with(getApplicationContext()).load(file).fitCenter().centerCrop().into(img5);
+                }
+            }
         }
     }
 
@@ -112,7 +143,8 @@ public class Add1PlaceActivity extends AppCompatActivity {
 
         for (int i = 0; i < images.size(); i++) {
             Log.i("pathhhhhhhhhhh", images.get(i).path);
-            Uri file = Uri.fromFile(new File(images.get(i).path));
+            file = Uri.fromFile(new File(images.get(i).path));
+            Log.d("fileName","Filename"+ fileName);
             Log.d("nn", file.getPath());
             StorageReference imgRef = storageRef.child("Place/" + fileName + "/" + i);
             UploadTask uploadTask = imgRef.putFile(file);

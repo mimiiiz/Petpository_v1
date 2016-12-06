@@ -82,8 +82,9 @@
                 android:text="Add Image"
                 android:textSize="18dp"
                 android:layout_below="@+id/detail"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginLeft="15dp"/>
+
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,8 +93,39 @@
                 android:layout_below="@+id/detail"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
                 android:layout_alignParentRight="true"
                 android:onClick="createImageBuffer"/>
+
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/img1"
+                android:layout_below="@+id/imgBtnAddImg"/>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/img2"
+                android:layout_toRightOf="@+id/img1"
+                android:layout_below="@+id/imgBtnAddImg"/>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/img3"
+                android:layout_toRightOf="@+id/img2"
+                android:layout_below="@+id/imgBtnAddImg"/>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/img4"
+                android:layout_toRightOf="@+id/img3"
+                android:layout_below="@+id/imgBtnAddImg"/>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/img5"
+                android:layout_toRightOf="@+id/img4"
+                android:layout_below="@+id/imgBtnAddImg"/>
         </RelativeLayout>
     </ScrollView>
     <LinearLayout
