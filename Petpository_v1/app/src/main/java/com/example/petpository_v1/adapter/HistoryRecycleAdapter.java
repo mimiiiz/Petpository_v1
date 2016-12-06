@@ -12,11 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.petpository_v1.Model.Pet;
 import com.example.petpository_v1.Model.RequestPet;
+import com.example.petpository_v1.Owner.SentRequestActivity;
 import com.example.petpository_v1.R;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -76,22 +79,29 @@ public class HistoryRecycleAdapter extends RecyclerView.Adapter<HistoryRecycleAd
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Pet pet = historyList.get(position).getPet();
         holder.petName.setText(pet.getPetName());
+        String placeName = historyList.get(position).getRequestPlaceName();
+        if (placeName!=null){
+            holder.sitterName.setText(historyList.get(position).getRequestPlaceName());
+        }
 
-        String sitterUID = historyList.get(position).getRequestUID_sitter();
 
-//        holder.sitterName.setText(historyList.get(position).getRequestUID_sitter());
-        /*
+
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yy");
 
-        try {
-            Date dateStart = format.parse(historyList.get(position).getRequestStartDate());
-            Date dateEnd = format.parse(historyList.get(position).getRequestEndDate());
+        Date dateStart = new Date();
+        Date dateEnd = new Date();
 
+        try {
+            dateStart  = format.parse(historyList.get(position).getRequestStartDate());
+            dateEnd = format.parse(historyList.get(position).getRequestEndDate());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        */
-        holder.dateRange.setText("2 days");
+
+        long diff = dateEnd.getTime() - dateStart.getTime();
+        long diffDay = (diff / (60 * 60 * 1000 * 24 ))+1;
+
+        holder.dateRange.setText(diffDay + " days");
         String status = historyList.get(position).getRequestStatus();
         if (status.equals("pending")){
             holder.status.setBackgroundResource(R.color.colorAccent);
@@ -103,9 +113,9 @@ public class HistoryRecycleAdapter extends RecyclerView.Adapter<HistoryRecycleAd
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
         String petId = pet.getPetID() + "/0";
-        StorageReference imageRef = storageRef.child("Owner").child(uid).child(petId);
-        Log.d("imageRef", imageRef.toString());
-        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+        StorageReference petImageRef = storageRef.child("Owner").child(uid).child(petId);
+        petImageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(context)
@@ -121,6 +131,14 @@ public class HistoryRecycleAdapter extends RecyclerView.Adapter<HistoryRecycleAd
                 holder.petImage.setImageResource(R.drawable.refresh);
             }
         });
+
+        StorageReference placeImageRef = storageRef.child("Place").child(historyList.get(position).getRequestPlaceID()+"/0");
+        Glide.with(context).using(new FirebaseImageLoader())
+                .load(placeImageRef)
+                .fitCenter()
+                .centerCrop()
+                .bitmapTransform(new CropCircleTransformation(context))
+                .into(holder.placeImage);
     }
 
 

@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,19 +24,29 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.petpository_v1.Model.Pet;
 import com.example.petpository_v1.Model.RequestPet;
 import com.example.petpository_v1.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class SentRequestActivity extends AppCompatActivity {
 
@@ -138,26 +150,44 @@ public class SentRequestActivity extends AppCompatActivity {
         if (diff >= 0 && ownPhone.length() > 0){
             dialogReview.show();
         }else if (diff < 0){
-            Toast.makeText(SentRequestActivity.this, "Please Enter right date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SentRequestActivity.this, "Invalid date range", Toast.LENGTH_SHORT).show();
         }else if (ownPhone.length() <= 0 || startDateET.getText().toString().length() <= 0 || endDateET.getText().toString().length() <= 0){
-            Toast.makeText(SentRequestActivity.this, "Please Enter all fill", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SentRequestActivity.this, "Please fill in to continue ", Toast.LENGTH_SHORT).show();
         }
 
         petData = (Pet) getIntent().getSerializableExtra("pet_data");
         Button confirmButton = (Button) dialogReview.findViewById(R.id.confirm_button);
-        TextView tv_petName = (TextView) dialogReview.findViewById(R.id.confirm_pet_name);
-        TextView tv_placeName = (TextView) dialogReview.findViewById(R.id.confirm_place_name);
+        final ImageView petImage = (ImageView) dialogReview.findViewById(R.id.my_pet_image);
+        TextView tv_msg = (TextView) dialogReview.findViewById(R.id.confirm_msg);
         TextView tv_amountDay = (TextView) dialogReview.findViewById(R.id.confirm_amount_day);
-        tv_petName.setText(petData.getPetName());
+
 
         SharedPreferences spf = getSharedPreferences("current_place", Context.MODE_PRIVATE);
-        tv_placeName.setText(spf.getString("place_name",null));
+        tv_msg.setText("Send " + petData.getPetName() + " to \n" + spf.getString("place_name",null));
+        tv_amountDay.setText(diffDay  + " days ?" );
 
-
-
-        tv_amountDay.setText(diffDay  + " Days" );
-
-
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("UID", uid);
+        StorageReference storageRef = storage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
+        StorageReference petImageRef = storageRef.child("Owner").child(uid).child(petData.getPetID()+"/0");
+        Log.d("ref", petImageRef.toString());
+        petImageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(SentRequestActivity.this)
+                        .load(uri)
+                        .fitCenter()
+                        .centerCrop()
+                        .bitmapTransform(new CropCircleTransformation(SentRequestActivity.this))
+                        .into(petImage);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                petImage.setImageResource(R.drawable.ic_pets_black_24dp);
+            }
+        });
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -178,21 +208,11 @@ public class SentRequestActivity extends AppCompatActivity {
                 newRequestPet.setRequestEndDate(endDateET.getText().toString());
                 newRequestPet.setPet(petData);
                 newRequestPet.setOwnerPhoneNo(phone.getText().toString());
+                newRequestPet.setRequestPlaceName(sp.getString("place_name",null));
 
-                Log.d("newRequestPet", newRequestPet.getRequestID()
-                        + "\n" + newRequestPet.getRequestUID_owner()
-                        + "\n" + newRequestPet.getRequestUID_sitter()
-                        + "\n" + newRequestPet.getRequestStatus()
-                        + "\n" + newRequestPet.getRequestPlaceID()
-                        + "\n" + newRequestPet.getRequestTimeStamp()
-                        + "\n" + newRequestPet.getRequestStartDate()
-                        + "\n" + newRequestPet.getRequestEndDate()
-                        + "\n" + newRequestPet.getPet().getPetID()
-                        + "\n" + newRequestPet.getOwnerPhoneNo() + "\n");
                 requestRef.child(genkey).setValue(newRequestPet);
-                sp.edit().clear();
                 dialogReview.cancel();
-                startActivity(new Intent(SentRequestActivity.this, OwnerMainActivity.class));
+                startActivity(new Intent(SentRequestActivity.this, History.class));
                 finish();
             }
         });

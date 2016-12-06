@@ -207,7 +207,6 @@ public class PendingActivity extends AppCompatActivity {
                 //check place id same selected && status = pending
                 if (mSnap.child("requestPlaceID").getValue().toString().equals(requestPlaceId)
                         && mSnap.child("requestStatus").getValue().toString().equals("pending")) {
-                    Log.d("mSnap", mSnap.toString());
                     requestPetObj = new RequestPet();
                     requestPetObj = mSnap.getValue(RequestPet.class);
                     requestPetsArray.add(requestPetObj);
@@ -217,7 +216,6 @@ public class PendingActivity extends AppCompatActivity {
 
             if (requestPetsArray.size() != 0) {
                 for (RequestPet reqPet : requestPetsArray) {
-                    Log.d("a", ">>>>>>>>>>>>>array");
                     setTextView(reqPet);
                 }
 

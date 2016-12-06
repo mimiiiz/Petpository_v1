@@ -50,12 +50,10 @@ public class History extends AppCompatActivity {
         });
 
         mRecyclerView = (RecyclerView) findViewById(R.id.owner_history_recycle);
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         historyList = new ArrayList();
@@ -68,6 +66,7 @@ public class History extends AppCompatActivity {
         super.onStart();
         reference = FirebaseDatabase.getInstance().getReference();
         requestRef = reference.child("RequestPet");
+        requestRef.limitToLast(50);
         user = FirebaseAuth.getInstance().getCurrentUser();
         listener = new ValueEventListener() {
             @Override
@@ -78,7 +77,6 @@ public class History extends AppCompatActivity {
                     if(request.getRequestUID_owner().equals(user.getUid())){
                         historyList.add(request);
                     }
-                    Log.d("historyLog Size", historyList.size()+"");
                 }
                 mAdapter = new HistoryRecycleAdapter(historyList, History.this, user.getUid());
                 mRecyclerView.setAdapter(mAdapter);
