@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,15 +53,14 @@ public class PendingActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         requestPlaceId = intent.getStringExtra("placeId");
-
         createRequestPet();
-
 
     }
 
     protected void setTextView(RequestPet requestPetObj){
 
         dialog = new Dialog(PendingActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.pending_dialog);
 
         imgv_petPic = (ImageView)dialog.findViewById(R.id.imgv_petRequest);
@@ -82,6 +83,19 @@ public class PendingActivity extends AppCompatActivity {
         Button declinebt = (Button)dialog.findViewById(R.id.btn_denied);
         declinebt.setTextColor(Color.parseColor("#ffffff"));
 
+        TextView closebt = (TextView)dialog.findViewById(R.id.skip);
+        closebt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Intent intentToRecentReq = new Intent(PendingActivity.this, RecentRequestActivity.class);
+                startActivity(intentToRecentReq);
+                finish();
+            }
+        });
+
+
+
         //get pet img
         mStorage = FirebaseStorage.getInstance();
         StorageReference storageRef = mStorage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
@@ -99,7 +113,7 @@ public class PendingActivity extends AppCompatActivity {
 
         //get owner email
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query mQ = mDatabase.child("Users").child(requestPetObj.getRequestUID_owner()).child("email");
+        Query mQ = mDatabase.child("Users").child(requestPetObj.getRequestUID_owner()).child("name");
         mQ.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -111,6 +125,8 @@ public class PendingActivity extends AppCompatActivity {
 
             }
         });
+        dialog.setTitle(null);
+        dialog.setCancelable(false);
         dialog.show();
 
 
