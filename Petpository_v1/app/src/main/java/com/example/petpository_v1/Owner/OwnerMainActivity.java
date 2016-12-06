@@ -62,6 +62,7 @@ public class OwnerMainActivity extends AppCompatActivity implements GoogleApiCli
         setSupportActionBar(myToolbar);
 
         sortCardBt = (ImageButton) findViewById(R.id.sortCardBt);
+        sortCardBt.setImageResource(R.drawable.ic_place_black_24dp);
 
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
