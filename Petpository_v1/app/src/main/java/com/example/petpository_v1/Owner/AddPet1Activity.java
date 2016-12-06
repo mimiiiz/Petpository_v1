@@ -1,5 +1,6 @@
 package com.example.petpository_v1.Owner;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.vision.text.Text;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -46,8 +49,8 @@ import java.util.ArrayList;
 
 public class AddPet1Activity extends AppCompatActivity {
 
-    private ImageView imgv_petPhoto;
-    private Button btn_addPet;
+    private ImageView imgv_petPhoto, imgv_confirm_pet_pic;
+    private Button btn_addPet, btn_confirm, btn_back;
     private EditText et_petName, et_petBreed;
     private String petName, keyGenPetID, owner_UID, petType;
     private Pet Pet;
@@ -63,6 +66,8 @@ public class AddPet1Activity extends AppCompatActivity {
     private Integer check_enableBtn_name = 0, check_enableBtn_type = 0;
     private Uri file;
     private ChildEventListener childEventListener;
+    private Dialog confirmAddDialog;
+    private TextView tv_confirm_petname, tv_confirm_petBreed, tv_confirm_petSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,41 +164,62 @@ public class AddPet1Activity extends AppCompatActivity {
                 Pet.setPetSize(size);
                 Pet.setPetID(keyGenPetID);
 
-                mDatabase.child("Owner").child(owner_UID).child("Pet").child(keyGenPetID).setValue(Pet);
+                setConfirmDialog();
+                confirmAddDialog.show();
 
-                Intent intent = new Intent(AddPet1Activity.this, MyPetsActivity.class);
-                Toast.makeText(AddPet1Activity.this, "Add pet success !", Toast.LENGTH_SHORT).show();
-
-                childEventListener = new ChildEventListener() {
+                btn_confirm = (Button) confirmAddDialog.findViewById(R.id.btn_conf_add);
+                btn_confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        finish();
-                    }
+                    public void onClick(View view) {
 
+                        mDatabase.child("Owner").child(owner_UID).child("Pet").child(keyGenPetID).setValue(Pet);
+
+                        Intent intent = new Intent(AddPet1Activity.this, MyPetsActivity.class);
+                        Toast.makeText(AddPet1Activity.this, "Add pet success !", Toast.LENGTH_SHORT).show();
+
+                        childEventListener = new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                finish();
+                            }
+
+                            @Override
+                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        };
+
+                        myPetRef = mDatabase.child("Owner").child(owner_UID).child("Pet").child(keyGenPetID);
+                        myPetRef.addChildEventListener(childEventListener);
+                        startActivity(intent);
+
+                    }
+                });
+
+                btn_back = (Button) confirmAddDialog.findViewById(R.id.btn_conf_back);
+                btn_back.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                    public void onClick(View view) {
+                        confirmAddDialog.dismiss();
                     }
+                });
 
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                };
-
-                myPetRef = mDatabase.child("Owner").child(owner_UID).child("Pet").child(keyGenPetID);
-                myPetRef.addChildEventListener(childEventListener);
-                startActivity(intent);
             }
         });
     }
@@ -281,8 +307,26 @@ public class AddPet1Activity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if(childEventListener!=null){
+        if (childEventListener != null) {
             myPetRef.removeEventListener(childEventListener);
         }
+    }
+
+    public void setConfirmDialog() {
+        confirmAddDialog = new Dialog(AddPet1Activity.this);
+        confirmAddDialog.setTitle("Confirm add pet");
+        confirmAddDialog.setContentView(R.layout.confirm_add_pet_dialog);
+
+        imgv_confirm_pet_pic = (ImageView) confirmAddDialog.findViewById(R.id.imgv_confirm_pet_pic);
+        tv_confirm_petname = (TextView) confirmAddDialog.findViewById(R.id.tv_confirm_petname);
+        tv_confirm_petBreed = (TextView) confirmAddDialog.findViewById(R.id.tv_confirm_petBreed);
+        tv_confirm_petSize = (TextView) confirmAddDialog.findViewById(R.id.tv_confirm_petSize);
+
+        Glide.with(AddPet1Activity.this).load(file).fitCenter().centerCrop().into(imgv_confirm_pet_pic);
+
+
+        tv_confirm_petname.setText(Pet.getPetName());
+        tv_confirm_petBreed.setText(Pet.getPetType());
+        tv_confirm_petSize.setText(Pet.getPetSize());
     }
 }
