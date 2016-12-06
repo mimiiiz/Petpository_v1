@@ -68,7 +68,7 @@ public class Add1PlaceActivity extends AppCompatActivity {
         placeObj = new Place();
 
         keyGen = mDatabase.child("Sitter").push().getKey();
-        mDatabase.child("Sitter").child(keyGen).setValue(placeObj);
+//        mDatabase.child("Sitter").child(keyGen).setValue(placeObj);
 
         storeImage(keyGen, images);
 

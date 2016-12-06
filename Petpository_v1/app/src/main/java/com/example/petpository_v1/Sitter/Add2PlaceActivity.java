@@ -39,6 +39,7 @@ public class Add2PlaceActivity extends AppCompatActivity {
         keyGen = intent.getStringExtra("keygen");
 
         backoneBt = (Button)findViewById(R.id.backtoone);
+        backoneBt.setText("< BACK");
         nextthreeBt = (Button)findViewById(R.id.nexttothree);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();

@@ -65,11 +65,13 @@ public class Add3PlaceActivity extends AppCompatActivity {
                 mDatabase.child("Sitter").child(keyGen).setValue(place);
 
                 intent1 = new Intent(Add3PlaceActivity.this, SitterMainActivity.class);
+                finish();
                 startActivity(intent1);
             }
         });
 
         backtwoBt = (Button)findViewById(R.id.backtotwo);
+        backtwoBt.setText("< BACK");
         backtwoBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
