@@ -119,6 +119,8 @@ public class SentRequestActivity extends AppCompatActivity {
         dialogReview.getWindow().setBackgroundDrawable(new ColorDrawable(00000000));
 
 
+        String ownPhone = phone.getText().toString();
+
         String startDateStr = startDateET.getText().toString();
         String endDateStr = endDateET.getText().toString();
 
@@ -130,12 +132,15 @@ public class SentRequestActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        
         long diff = endDateReal.getTime() - startDateReal.getTime();
         long diffDay = (diff / (60 * 60 * 1000 * 24 ))+1;
-        if (diff >= 0 ){
+        if (diff >= 0 && ownPhone.length() > 0){
             dialogReview.show();
-        }else {
+        }else if (diff < 0){
             Toast.makeText(SentRequestActivity.this, "Please Enter right date", Toast.LENGTH_SHORT).show();
+        }else if (ownPhone.length() <= 0 || startDateET.getText().toString().length() <= 0 || endDateET.getText().toString().length() <= 0){
+            Toast.makeText(SentRequestActivity.this, "Please Enter all fill", Toast.LENGTH_SHORT).show();
         }
 
         petData = (Pet) getIntent().getSerializableExtra("pet_data");
