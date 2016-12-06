@@ -18,8 +18,7 @@ public class RequestPet implements Serializable {
     private String requestStartDate;
     private String requestEndDate;
     private Pet Pet;
-    private String requestPetID;
-    private String ownerPhoneNo;
+    private String OwnerPhoneNo;
 
     public String getRequestPetID() {
         return requestPetID;
@@ -102,10 +101,10 @@ public class RequestPet implements Serializable {
     }
 
     public String getOwnerPhoneNo() {
-        return ownerPhoneNo;
+        return OwnerPhoneNo;
     }
 
-    public void setOwnerPhoneNumber(String ownerPhoneNo) {
-        ownerPhoneNo = ownerPhoneNo;
+    public void setOwnerPhoneNo(String ownerPhoneNo) {
+        OwnerPhoneNo = ownerPhoneNo;
     }
 }

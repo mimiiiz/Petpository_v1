@@ -200,12 +200,10 @@ public class PendingActivity extends AppCompatActivity {
                             && mSnap.child("requestStatus").getValue().toString().equals("pending")) {
                         requestPetObj = new RequestPet();
                         requestPetObj = mSnap.getValue(RequestPet.class);
-                        Log.d("req obj in if>>>>> ", mSnap.toString());
                         requestPetsArray.add(requestPetObj);
                     } //end if
                 } // end for
 
-                Log.d("size >>> ...", requestPetsArray.size() + " .............");
 
                 if (requestPetsArray.size() != 0) {
                     for (RequestPet reqPet : requestPetsArray) {

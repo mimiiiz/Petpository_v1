@@ -66,6 +66,11 @@ public class SitterMainActivity extends AppCompatActivity {
         recyclerView.setAdapter(myPlaceAdapterRecycler);
 
 
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            String uid = user.getUid();
+        }
     }
 
     private void getMyPlaces() {
@@ -80,7 +85,6 @@ public class SitterMainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 places.clear();
                 for (DataSnapshot placeSnapshot : dataSnapshot.getChildren()) {
-                    Log.d("ddddddd", dataSnapshot.toString());
                     Place place = placeSnapshot.getValue(Place.class);
                     place.setPlaceId(placeSnapshot.getKey());
                     places.add(place);

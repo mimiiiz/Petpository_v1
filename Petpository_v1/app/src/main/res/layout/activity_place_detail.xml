@@ -254,8 +254,6 @@
                 android:layout_height="200dp"
                 android:layout_below="@id/re1"
                 class="com.google.android.gms.maps.MapFragment" />
-
-
         </RelativeLayout>
     </ScrollView>
     <View
@@ -265,20 +263,21 @@
     <RelativeLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:layout_gravity="center"
-        android:background="#C2185B">
+        android:background="@color/colorPrimary">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bookbt"
             android:layout_centerHorizontal="true"
-            android:background="#f4f4f4"
             android:text="Book now"
-            android:onClick="onClickBook" />
+            android:onClick="onClickBook"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="@color/colorTextIcons" />
 
     </RelativeLayout>
 
