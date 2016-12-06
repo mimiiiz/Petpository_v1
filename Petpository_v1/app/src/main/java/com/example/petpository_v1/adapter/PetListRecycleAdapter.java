@@ -1,5 +1,6 @@
 package com.example.petpository_v1.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -77,9 +78,13 @@ public class PetListRecycleAdapter extends RecyclerView.Adapter<PetListRecycleAd
         View.OnClickListener select = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, SentRequestActivity.class);
-                intent.putExtra("pet_data",myPetList.get(position));
-                context.startActivity(intent);
+                if (context.getClass().getSimpleName().equals("ChoosePetActivity")){
+                    Intent intent = new Intent(context, SentRequestActivity.class);
+                    intent.putExtra("pet_data",myPetList.get(position));
+                    context.startActivity(intent);
+                }else if (context.getClass().getSimpleName().equals("MyPetsActivity")){
+
+                }
             }
         };
         holder.petImageButton.setOnClickListener(select);

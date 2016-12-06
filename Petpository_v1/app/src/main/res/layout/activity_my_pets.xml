@@ -1,19 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_my_pets"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.petpository_v1.Owner.MyPetsActivity">
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add new pet"
-        android:id="@+id/btn_gotoAddPet"/>
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:id="@+id/no_pet_text"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You have no pet yet"
+            android:textSize="25dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryText"
+            android:textStyle="normal|italic" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="press yellow button to add new pet"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textStyle="normal|italic" />
+
+    </LinearLayout>
+
+    <include layout="@layout/custom_title_toolbar"></include>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/pet_list_recyle_view"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="60dp"
+            android:clipToPadding="false"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_gotoAddPet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:clickable="true"
+            android:tint="@android:color/background_light"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/add_icon"
+            android:layout_margin="16dp"
+            android:onClick="addPet"/>
+    </android.support.design.widget.CoordinatorLayout>
 
 </RelativeLayout>

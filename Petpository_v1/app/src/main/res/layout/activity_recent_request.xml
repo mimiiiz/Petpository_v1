@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.petpository_v1.Sitter.RecentRequestActivity">
 
+    <include layout="@layout/custom_title_toolbar"></include>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/requestRecyclerView">
+        android:id="@+id/requestRecyclerView"
+        android:layout_marginTop="60dp">
     </android.support.v7.widget.RecyclerView>
 
     <TextView

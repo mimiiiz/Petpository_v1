@@ -7,8 +7,6 @@
     tools:context="com.example.petpository_v1.Owner.OwnerMainActivity"
     android:orientation="vertical">
 
-
-
     <include layout="@layout/custom_toolbar"></include>
 
     <android.support.v7.widget.RecyclerView
