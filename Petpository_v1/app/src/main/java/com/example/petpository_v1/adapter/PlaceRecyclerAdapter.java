@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.petpository_v1.Owner.PlaceDetailActivity;
 import com.example.petpository_v1.R;
 import com.example.petpository_v1.Model.Place;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -48,6 +49,7 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceRecyclerAdap
         private TextView placeNameLabel;
         private TextView placeWorkDayLabel;
         private TextView placePriceLabel;
+        private TextView distanceLabel;
 
         public ViewHolder(View view){
             super(view);
@@ -56,6 +58,7 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceRecyclerAdap
             placeNameLabel = (TextView) view.findViewById(R.id.placeNameLabel);
             placeWorkDayLabel = (TextView) view.findViewById(R.id.placeDogNumberLabel);
             placePriceLabel = (TextView) view.findViewById(R.id.placePriceLabel);
+            distanceLabel = (TextView) view.findViewById(R.id.distanceLabel);
         }
     }
 
@@ -68,10 +71,18 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceRecyclerAdap
 
     @Override
     public void onBindViewHolder(final PlaceRecyclerAdapter.ViewHolder holder, final int position) {
+
+
         //Glide.with(mContext).load(placeList.get(position).getPlacePhoto().get(0)).fitCenter().centerCrop().into(holder.placeImage);
         holder.placeNameLabel.setText(placeList.get(position).getPlaceName());
         holder.placeWorkDayLabel.setText(placeList.get(position).getPlaceDogNum() + " ตัว");
         holder.placePriceLabel.setText(String.format("%.2f บาท", placeList.get(position).getPlacePrice()));
+        if (placeList.get(position).getDistance() > 1000) {
+            holder.distanceLabel.setText("999+ km");
+        } else {
+            holder.distanceLabel.setText(String.format("%.2f km", placeList.get(position).getDistance()));
+
+        }
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,19 +101,20 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceRecyclerAdap
         Log.i("AAAAAAAA", placeList.get(position).getPlaceId());
         Log.i("mimikak", "mimikak");
         StorageReference aaa = storageRef.child("Place/" + placeList.get(position).getPlaceId() + "/0");
-        aaa.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                // Got the download URL for 'users/me/profile.png'
-                Log.d("D>>>>>>>>>>>>>>>>>>>>>>", uri.toString());
-                Glide.with(mContext).load(uri).fitCenter().centerCrop().into(holder.placeImage);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
+        Glide.with(mContext).using(new FirebaseImageLoader()).load(aaa).fitCenter().centerCrop().into(holder.placeImage);
+//        aaa.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                // Got the download URL for 'users/me/profile.png'
+//                Log.d("D>>>>>>>>>>>>>>>>>>>>>>", uri.toString());
+//                Glide.with(mContext).load(uri).fitCenter().centerCrop().into(holder.placeImage);
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle any errors
+//            }
+//        });
 
     }
 

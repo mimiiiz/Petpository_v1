@@ -68,7 +68,8 @@ public class Add1PlaceActivity extends AppCompatActivity {
         placeObj = new Place();
 
         keyGen = mDatabase.child("Sitter").push().getKey();
-        mDatabase.child("Sitter").child(keyGen).setValue(placeObj);
+        Log.wtf("keyyyyy", keyGen);
+//        mDatabase.child("Sitter").child(keyGen).setValue(placeObj);
 
         storeImage(keyGen, images);
 
@@ -109,11 +110,13 @@ public class Add1PlaceActivity extends AppCompatActivity {
 
     private void storeImage(String fileName, ArrayList<Image> images) {
         Log.d("ImageList>>>>>>>>>>", images.toString());
+        Log.wtf("flename", fileName);
 
         for (int i = 0; i < images.size(); i++) {
             Log.i("pathhhhhhhhhhh", images.get(i).path);
             Uri file = Uri.fromFile(new File(images.get(i).path));
             Log.d("nn", file.getPath());
+            Log.wtf("flename", fileName);
             StorageReference imgRef = storageRef.child("Place/" + fileName + "/" + i);
             UploadTask uploadTask = imgRef.putFile(file);
             // Register observers to listen for when the download is done or if it fails
