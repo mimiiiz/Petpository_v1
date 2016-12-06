@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.petpository_v1.Owner.AddPet1Activity;
+import com.example.petpository_v1.Owner.MyPetsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -61,6 +64,15 @@ public class ProfileActivity extends AppCompatActivity {
         mainButton = (TextView) findViewById(R.id.main_button);
         if (mode.equals("Owner")) {
             mainButton.setText("My pets");
+            mainButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(ProfileActivity.this, "toastttt", Toast.LENGTH_SHORT).show();
+                    Intent intentToMyPets = new Intent(ProfileActivity.this, MyPetsActivity.class);
+                    startActivity(intentToMyPets);
+//                    finish();
+                }
+            });
         }else if (mode.equals("Sitter")){
             mainButton.setText("My places");
         }
