@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Max Dog Number"
+        android:text="Max number of dog"
         android:textSize="18dp"
         android:id="@+id/dognumtag"
         android:layout_below="@+id/progressthree"
@@ -35,7 +35,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Price"
+        android:text="Start Price/Day"
         android:textSize="18dp"
         android:id="@+id/pricetag"
         android:layout_marginLeft="15dp"
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/price"
-        android:hint="xxx (baht/hr.)"
+        android:hint="xxx (Baht/Day)"
         android:layout_below="@+id/pricetag"
         android:layout_marginLeft="15dp"
         android:maxLines="1"
