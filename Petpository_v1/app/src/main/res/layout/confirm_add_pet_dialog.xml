@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:layout_margin="5dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentStart="true"
+        android:id="@+id/v_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/v_line"
+        android:layout_margin="10dp"
+        android:id="@+id/ln_pet_info">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgv_confirm_pet_pic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_confirm_petname"
+                android:text="Name"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_confirm_petBreed"
+                android:text="breed"
+                android:textStyle="normal"
+                android:layout_alignStart="@+id/tv_confirm_petname"
+                android:layout_below="@+id/tv_confirm_petname"
+                android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_confirm_petSize"
+                    android:text="small"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:textStyle="normal"
+                    android:layout_alignStart="@+id/tv_confirm_petname"
+                    android:layout_below="@+id/tv_confirm_petBreed" />
+
+            </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/ln_pet_info">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/btn_conf_add"
+            android:layout_weight="1"
+            android:background="#FFE87C"
+            android:text="Confirm"
+            android:layout_margin="5dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Back"
+            android:background="#FFE87C"
+            android:id="@+id/btn_conf_back"
+            android:layout_weight="1"
+            android:layout_margin="5dp"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
