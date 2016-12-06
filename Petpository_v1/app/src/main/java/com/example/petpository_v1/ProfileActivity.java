@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.petpository_v1.Owner.AddPet1Activity;
+import com.example.petpository_v1.Owner.History;
 import com.example.petpository_v1.Owner.MyPetsActivity;
 import com.example.petpository_v1.Sitter.SitterMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -65,18 +66,26 @@ public class ProfileActivity extends AppCompatActivity {
         }
         mainButton = (TextView) findViewById(R.id.main_button);
         historyButton = (TextView) findViewById(R.id.history_button);
+
         if (mode.equals("Owner")) {
             mainButton.setText("My pets");
+            historyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(ProfileActivity.this, History.class));
+                }
+            });
             mainButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intentToMyPets = new Intent(ProfileActivity.this, MyPetsActivity.class);
                     startActivity(intentToMyPets);
-//                    finish();
+
                 }
             });
         }else if (mode.equals("Sitter")){
             mainButton.setText("My places");
+            historyButton.setEnabled(false);
             mainButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

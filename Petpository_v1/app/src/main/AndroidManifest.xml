@@ -21,7 +21,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBd0AXxRg_J9DhsxavKk-One8UQCu7Hu9M" />
-        <activity android:name=".MainActivity"/>
+
+        <activity android:name=".MainActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".Sitter.RecentRequestActivity" />
@@ -35,7 +36,8 @@
         <activity android:name=".Owner.ChoosePetActivity" />
         <activity android:name=".Owner.MyPetsActivity" />
         <activity android:name=".Sitter.Add2PlaceActivity" />
-        <activity android:name=".Sitter.Add3PlaceActivity"></activity>
+        <activity android:name=".Sitter.Add3PlaceActivity" />
+        <activity android:name=".Owner.History"></activity>
     </application>
 
 </manifest>
