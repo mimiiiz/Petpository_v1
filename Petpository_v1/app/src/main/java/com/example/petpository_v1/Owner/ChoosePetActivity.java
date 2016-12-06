@@ -51,6 +51,7 @@ public class ChoosePetActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sp.edit();
         currentUserUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         editor.putString("place_id", place_detail.getPlaceId());
+        editor.putString("place_name", place_detail.getPlaceName());
         editor.putString("owner_id", currentUserUID);
         editor.putString("sitter_id",place_detail.getUidSitter());
         editor.commit();
