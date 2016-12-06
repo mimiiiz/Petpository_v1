@@ -87,6 +87,7 @@ public class SitterMainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 places.clear();
                 for (DataSnapshot placeSnapshot : dataSnapshot.getChildren()) {
+                    Log.d("SitterMain", "aaa");
                     Place place = placeSnapshot.getValue(Place.class);
                     place.setPlaceId(placeSnapshot.getKey());
                     places.add(place);

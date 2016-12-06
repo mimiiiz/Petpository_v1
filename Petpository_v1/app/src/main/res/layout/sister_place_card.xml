@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:id="@+id/placeImageViewer" />
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -35,16 +35,18 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/placeNameLabel"
                     android:textSize="16dp"
+                    android:layout_alignParentLeft="true"
                     android:layout_margin="16dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
+                    android:layout_alignParentRight="true"
                     android:background="@color/colorAccent"
                     android:textColor="@color/cardview_light_background"
                     android:id="@+id/notiRequestPending"
                     android:layout_margin="16dp"
+                    android:gravity="center"
                     android:padding="8dp"/>
 
                 <TextView
@@ -52,10 +54,12 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/iii"
                     android:textSize="14dp"
+                    android:gravity="center"
+                    android:layout_toRightOf="@id/notiRequestPending"
                     android:textColor="@color/cardview_light_background"
                     android:layout_margin="16dp"/>
 
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
 

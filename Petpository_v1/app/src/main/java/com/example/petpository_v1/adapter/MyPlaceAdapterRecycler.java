@@ -38,7 +38,7 @@ public class MyPlaceAdapterRecycler extends RecyclerView.Adapter<MyPlaceAdapterR
 
     Context mContext;
     ArrayList<Place> places;
-    ArrayList<RequestPet> requestPets;
+//    ArrayList<RequestPet> requestPets;
 
     public MyPlaceAdapterRecycler(Context context, ArrayList<Place> places) {
         this.mContext = context;
@@ -108,22 +108,29 @@ public class MyPlaceAdapterRecycler extends RecyclerView.Adapter<MyPlaceAdapterR
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
-        requestPets = new ArrayList<>();
         databaseReference.child("RequestPet").orderByChild("requestPlaceID")
                 .equalTo(places.get(position).getPlaceId())
                 .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                holder.notiTextView.setText(dataSnapshot.getChildrenCount() + " pending requests");
+                ArrayList<RequestPet> requestPets = new ArrayList<>();
+//                holder.notiTextView.setText(dataSnapshot.getChildrenCount() + " pending requests");
                 for (DataSnapshot requestData : dataSnapshot.getChildren()){
                     RequestPet requestPet = requestData.getValue(RequestPet.class);
-                    Log.d("requestPet>>>>>", requestPet.getRequestStatus());
+                    Log.d("requestPet>>>>>", requestPet.getPet().getPetName() + requestPet.getRequestStatus() + " " + position);
                     if(requestPet.getRequestStatus().equals("pending")){
+
                         requestPets.add(requestPet);
                     }
                 }
+
+//                Log.d("requestPet", requestPets.size() + " " + position);
+//                holder.notiTextView.setText(String.format("%d", requestPets.size()));
                 if (requestPets.size() == 0){
                     holder.notiTextView.setVisibility(View.GONE);
+                }else if(requestPets.size() == 1){
+                    holder.notiTextView.setVisibility(View.VISIBLE);
+                    holder.notiTextView.setText(requestPets.size() + " pending request");
                 }else {
                     holder.notiTextView.setVisibility(View.VISIBLE);
                     holder.notiTextView.setText(requestPets.size() + " pending requests");
