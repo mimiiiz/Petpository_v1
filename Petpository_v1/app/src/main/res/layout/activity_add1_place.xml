@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.petpository_v1.Sitter.Add1PlaceActivity">
+    <include layout="@layout/custom_title_toolbar"
+        android:id="@+id/tool_add_place"></include>
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
