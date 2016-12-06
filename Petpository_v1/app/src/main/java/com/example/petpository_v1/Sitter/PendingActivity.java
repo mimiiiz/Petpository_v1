@@ -150,6 +150,7 @@ public class PendingActivity extends AppCompatActivity {
 
                 }else {
                     Intent intentToRecentReq = new Intent(PendingActivity.this, RecentRequestActivity.class);
+                    intentToRecentReq.putExtra("placeId", requestPlaceId);
                     startActivity(intentToRecentReq);
                     finish();
                 }

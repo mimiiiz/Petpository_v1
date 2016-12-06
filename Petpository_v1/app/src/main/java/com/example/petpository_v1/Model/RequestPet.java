@@ -19,6 +19,15 @@ public class RequestPet implements Serializable {
     private String requestEndDate;
     private Pet Pet;
     private String requestPetID;
+    private String ownerPhoneNo;
+
+    public String getRequestPetID() {
+        return requestPetID;
+    }
+
+    public void setRequestPetID(String requestPetID) {
+        this.requestPetID = requestPetID;
+    }
 
     public com.example.petpository_v1.Model.Pet getPet() {
         return Pet;
@@ -92,5 +101,11 @@ public class RequestPet implements Serializable {
         this.requestEndDate = requestEndDate;
     }
 
+    public String getOwnerPhoneNo() {
+        return ownerPhoneNo;
+    }
 
+    public void setOwnerPhoneNumber(String ownerPhoneNo) {
+        ownerPhoneNo = ownerPhoneNo;
+    }
 }

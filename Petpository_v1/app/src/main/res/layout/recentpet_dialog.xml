@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Request Detail"-->
+        <!--android:id="@+id/req"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textStyle="normal|bold"/>-->
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/dogimg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lin"
+        android:layout_below="@id/dogimg"
+        android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/li1"
+        android:layout_weight="1"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/dogimg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name:"
+            android:id="@+id/name"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Size:"
+            android:id="@+id/size"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Breed:"
+            android:id="@+id/breed"
+            android:textSize="18sp"
+            android:layout_gravity="end"
+            android:textStyle="normal|bold"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Owner:"
+            android:id="@+id/owner"
+            android:textSize="18sp"
+            android:layout_gravity="end"
+            android:textStyle="normal|bold"
+            android:layout_marginTop="10dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date:"
+            android:id="@+id/date"
+            android:layout_gravity="end"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to:"
+            android:id="@+id/to"
+            android:layout_gravity="end"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:layout_marginTop="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tel:"
+            android:id="@+id/tel"
+            android:layout_gravity="end"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:layout_marginTop="15dp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_toRightOf="@+id/li1"
+        android:layout_below="@+id/dogimg">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="fadfdsf"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="start"
+            android:id="@+id/nametv" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="fadfdsf"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="start"
+            android:layout_below="@id/nametv"
+            android:id="@+id/sizetv" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="fadfdsf"
+            android:layout_below="@id/sizetv"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="start"
+            android:id="@+id/breedtv" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="fadfdsf"
+            android:layout_below="@id/breedtv"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="start"
+            android:id="@+id/ownertv" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="dateeef"
+            android:layout_below="@id/ownertv"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="start"
+            android:id="@+id/datetv" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="fadfdsf"
+            android:layout_below="@id/datetv"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="start"
+            android:id="@+id/totv" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="0000000000"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:layout_below="@id/totv"
+                android:id="@+id/teltv" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/telowner"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:onClick="onClickTelOwner"
+                android:layout_below="@id/totv"
+                android:layout_toRightOf="@id/teltv"
+
+                android:background="@drawable/ic_phone"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    </LinearLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/lin">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/close"
+        android:layout_marginTop="33dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/cardview_light_background"
+        android:text="Close"/>
+</RelativeLayout>
+
+
+
+    <!--<ImageButton-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:id="@+id/telowner"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:layout_below="@id/teltv"-->
+        <!--android:onClick="onClickTelOwner"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:background="@drawable/ic_phone"/>-->
+
+    <!--<ImageButton-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:id="@+id/close"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:background="@android:drawable/ic_menu_close_clear_cancel" />-->
+
+
+</RelativeLayout>

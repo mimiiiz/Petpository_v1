@@ -89,7 +89,7 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceRecyclerAdap
 
         Log.i("AAAAAAAA", placeList.get(position).getPlaceId());
         Log.i("mimikak", "mimikak");
-        StorageReference aaa = storageRef.child(placeList.get(position).getPlaceId() + "/0");
+        StorageReference aaa = storageRef.child("Place/" + placeList.get(position).getPlaceId() + "/0");
         aaa.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
