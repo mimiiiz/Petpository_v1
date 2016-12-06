@@ -30,7 +30,7 @@
         <activity android:name=".Owner.SentRequestActivity" />
         <activity android:name=".Owner.ChoosePetActivity" />
         <activity android:name=".Sitter.Add2PlaceActivity" />
-        <activity android:name=".Add3PlaceActivity"></activity>
+        <activity android:name=".Sitter.Add3PlaceActivity"></activity>
     </application>
 
 </manifest>

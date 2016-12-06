@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.petpository_v1.Add3PlaceActivity">
+    tools:context="com.example.petpository_v1.Sitter.Add3PlaceActivity">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

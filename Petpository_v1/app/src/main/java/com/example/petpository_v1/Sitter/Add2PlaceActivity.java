@@ -18,16 +18,16 @@ import java.util.ArrayList;
 
 public class Add2PlaceActivity extends AppCompatActivity {
 
-    Button backoneBt, nextthreeBt;
+    private Button backoneBt, nextthreeBt;
     private DatabaseReference mDatabase;
-    EditText et_dogNum, et_startPrice;
+    private EditText et_dogNum, et_startPrice;
     private String workdayAvailiable = "";
-    boolean Small, Medium, Large, monCheck, tueCheck, wedCheck, thuCheck, friCheck, satCheck, sunCheck;
-    ArrayList<String> sizeDog;
+    private boolean Small, Medium, Large, monCheck, tueCheck, wedCheck, thuCheck, friCheck, satCheck, sunCheck;
+    private ArrayList<String> sizeDog;
     public Place placeObj;
-    String dognumStr, priceStr;
-    Double priceStart;
-    int dogNum;
+    private String dognumStr, priceStr, keyGen;
+    private Double priceStart;
+    private int dogNum;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +36,7 @@ public class Add2PlaceActivity extends AppCompatActivity {
         Intent intent = getIntent();
         placeObj = new Place();
         placeObj = (Place) intent.getSerializableExtra("nameaddObj");
+        keyGen = intent.getStringExtra("keygen");
 
         backoneBt = (Button)findViewById(R.id.backtoone);
         nextthreeBt = (Button)findViewById(R.id.nexttothree);
@@ -51,7 +52,7 @@ public class Add2PlaceActivity extends AppCompatActivity {
         nextthreeBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Add2PlaceActivity.this, Add2PlaceActivity.class);
+                Intent intent = new Intent(Add2PlaceActivity.this, Add3PlaceActivity.class);
 
                 et_dogNum = (EditText)findViewById(R.id.dognum);
                 et_startPrice = (EditText)findViewById(R.id.price);
@@ -70,7 +71,7 @@ public class Add2PlaceActivity extends AppCompatActivity {
 
                 dognumStr = et_dogNum.getText().toString();
                 priceStr = et_startPrice.getText().toString();
-//
+
                 if (dognumStr != null && priceStr != null){
 
                     dogNum = Integer.parseInt(dognumStr);
@@ -81,6 +82,7 @@ public class Add2PlaceActivity extends AppCompatActivity {
                     placeObj.setPlaceDogSize(checkSize());
 
                     intent.putExtra("numpricedaysize", placeObj);
+                    intent.putExtra("KeyGen", keyGen);
                     startActivity(intent);
                 }else{
                     Toast.makeText(Add2PlaceActivity.this, "Please fill information", Toast.LENGTH_SHORT).show();

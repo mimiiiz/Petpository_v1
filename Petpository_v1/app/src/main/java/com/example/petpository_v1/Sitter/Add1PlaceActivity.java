@@ -28,14 +28,14 @@ import java.util.ArrayList;
 
 public class Add1PlaceActivity extends AppCompatActivity {
 
-    FirebaseStorage storage;
+    private FirebaseStorage storage;
     private StorageReference storageRef;
     private Place placeObj;
     private EditText placeName, placeAddress, placeDetail;
-    Double placeLatitude, placeLongtitude;
-    DatabaseReference mDatabase;
+    private Double placeLatitude, placeLongtitude;
+    private DatabaseReference mDatabase;
     private ArrayList<Image> images;
-    String keyGen;
+    private String keyGen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +67,8 @@ public class Add1PlaceActivity extends AppCompatActivity {
 
         placeObj = new Place();
 
-        keyGen = mDatabase.child("Place").push().getKey();
-        mDatabase.child("Place").child(keyGen).setValue(placeObj);
+        keyGen = mDatabase.child("Sitter").push().getKey();
+        mDatabase.child("Sitter").child(keyGen).setValue(placeObj);
 
         storeImage(keyGen, images);
 
@@ -80,8 +80,9 @@ public class Add1PlaceActivity extends AppCompatActivity {
             placeObj.setPlaceLongtitude(placeLongtitude);
 
 
-            Intent intent = new Intent(Add1PlaceActivity.this, Add1PlaceActivity.class);
+            Intent intent = new Intent(Add1PlaceActivity.this, Add2PlaceActivity.class);
             intent.putExtra("nameaddObj", placeObj);
+            intent.putExtra("keygen", keyGen);
             startActivity(intent);
         }else{
             Toast.makeText(Add1PlaceActivity.this, "Please fill information", Toast.LENGTH_SHORT).show();

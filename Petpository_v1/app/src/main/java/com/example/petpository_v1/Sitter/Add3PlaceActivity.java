@@ -1,4 +1,4 @@
-package com.example.petpository_v1;
+package com.example.petpository_v1.Sitter;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,25 +9,39 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.petpository_v1.Model.Place;
+import com.example.petpository_v1.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 
 public class Add3PlaceActivity extends AppCompatActivity {
 
-    Button saveBt, backtwoBt;
-    EditText Tel, Web, Fb, Line, Ig;
-    Place place;
+    private Button saveBt, backtwoBt;
+    private EditText Tel, Web, Fb, Line, Ig;
+    private Place place;
     private DatabaseReference mDatabase;
     private StorageReference storageRef;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+    private String uId;
+    private String keyGen;
+    private Intent intent, intent1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add3_place);
 
-        Intent intent = getIntent();
+
+        intent = getIntent();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         place = (Place) intent.getSerializableExtra("numpricedaysize");
+        keyGen = intent.getStringExtra("KeyGen");
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        uId = mFirebaseUser.getUid();
 
         saveBt = (Button)findViewById(R.id.saveBt);
         saveBt.setOnClickListener(new View.OnClickListener() {
@@ -45,9 +59,13 @@ public class Add3PlaceActivity extends AppCompatActivity {
                 place.setPlaceFacebook(Fb.getText().toString());
                 place.setPlaceLine(Line.getText().toString());
                 place.setPlaceIg(Ig.getText().toString());
+                place.setPlaceId(keyGen);
+                place.setUidSitter(uId);
 
-                String keyGen = mDatabase.push().getKey();
-                mDatabase.child("Place").child(keyGen).setValue(place);
+                mDatabase.child("Sitter").child(keyGen).setValue(place);
+
+                intent1 = new Intent(Add3PlaceActivity.this, SitterMainActivity.class);
+                startActivity(intent1);
             }
         });
 

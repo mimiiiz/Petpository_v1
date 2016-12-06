@@ -1,5 +1,7 @@
 package com.example.petpository_v1.Sitter;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.firebase.database.DatabaseError;
 import android.content.Intent;
@@ -29,13 +31,12 @@ import java.util.ArrayList;
 
 public class SitterMainActivity extends AppCompatActivity {
 
-
-    ImageView placeImageView;
-    TextView placeNameLabel;
-    MyPlaceAdapterRecycler myPlaceAdapterRecycler;
-    ArrayList<Place> places;
-    RecyclerView recyclerView;
-    String uId;
+    private ImageView placeImageView;
+    private TextView placeNameLabel;
+    private MyPlaceAdapterRecycler myPlaceAdapterRecycler;
+    private ArrayList<Place> places;
+    private RecyclerView recyclerView;
+    private String uId;
 
     int PLACE_PICKER_REQUEST = 1;
     Double placeLatitude, placeLongtitude;
@@ -128,4 +129,17 @@ public class SitterMainActivity extends AppCompatActivity {
         startActivity(new Intent(this, ProfileActivity.class));
     }
 
+    public void addPlaceBt(View v){
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        Intent intent;
+
+        try {
+            intent = builder.build(SitterMainActivity.this);
+            startActivityForResult(intent,PLACE_PICKER_REQUEST );
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
 }
