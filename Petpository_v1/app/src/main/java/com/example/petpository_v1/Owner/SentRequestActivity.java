@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -116,11 +117,45 @@ public class SentRequestActivity extends AppCompatActivity {
         dialogReview.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogReview.setContentView(R.layout.review_request_dialog);
         dialogReview.getWindow().setBackgroundDrawable(new ColorDrawable(00000000));
-        dialogReview.show();
+
+
+        String ownPhone = phone.getText().toString();
+
+        String startDateStr = startDateET.getText().toString();
+        String endDateStr = endDateET.getText().toString();
+
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyyy");
+        Date startDateReal = new Date(), endDateReal = new Date();
+        try {
+            startDateReal = df.parse(startDateStr);
+            endDateReal = df.parse(endDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        long diff = endDateReal.getTime() - startDateReal.getTime();
+        long diffDay = (diff / (60 * 60 * 1000 * 24 ))+1;
+        if (diff >= 0 && ownPhone.length() > 0){
+            dialogReview.show();
+        }else if (diff < 0){
+            Toast.makeText(SentRequestActivity.this, "Please Enter right date", Toast.LENGTH_SHORT).show();
+        }else if (ownPhone.length() <= 0 || startDateET.getText().toString().length() <= 0 || endDateET.getText().toString().length() <= 0){
+            Toast.makeText(SentRequestActivity.this, "Please Enter all fill", Toast.LENGTH_SHORT).show();
+        }
+
         petData = (Pet) getIntent().getSerializableExtra("pet_data");
         Button confirmButton = (Button) dialogReview.findViewById(R.id.confirm_button);
-        TextView petName = (TextView) dialogReview.findViewById(R.id.confirm_pet_name);
-        petName.setText(petData.getPetName());
+        TextView tv_petName = (TextView) dialogReview.findViewById(R.id.confirm_pet_name);
+        TextView tv_placeName = (TextView) dialogReview.findViewById(R.id.confirm_place_name);
+        TextView tv_amountDay = (TextView) dialogReview.findViewById(R.id.confirm_amount_day);
+        tv_petName.setText(petData.getPetName());
+
+        SharedPreferences spf = getSharedPreferences("current_place", Context.MODE_PRIVATE);
+        tv_placeName.setText(spf.getString("place_name",null));
+
+
+
+        tv_amountDay.setText(diffDay  + " Days" );
 
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -155,10 +190,10 @@ public class SentRequestActivity extends AppCompatActivity {
                         + "\n" + newRequestPet.getPet().getPetID()
                         + "\n" + newRequestPet.getOwnerPhoneNo() + "\n");
                 requestRef.child(genkey).setValue(newRequestPet);
+                sp.edit().clear();
                 dialogReview.cancel();
                 startActivity(new Intent(SentRequestActivity.this, OwnerMainActivity.class));
                 finish();
-
             }
         });
     }
