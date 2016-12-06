@@ -28,7 +28,7 @@ public class Place implements Serializable {
     private Double placeLongtitude;
     private int placeNumberImg;
     private String uidSitter;
-    private  String placeActivity;
+    private String placeActivity;
     private int placeDogNum;
     private ArrayList<String> placeDogSize;
     private Map<String, RequestPet> Client;
@@ -40,8 +40,6 @@ public class Place implements Serializable {
     public void setPlaceActivity(String placeActivity) {
         this.placeActivity = placeActivity;
     }
-
-
 
     public String getPlaceId() {
 
