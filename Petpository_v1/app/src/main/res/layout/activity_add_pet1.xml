@@ -13,29 +13,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/et_petName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="25dp"
-                android:hint="Your pet's name"/>
-
-            <ImageView
-                android:id="@+id/imgv_petPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="#D8D5D4"
-                android:src="@drawable/ic_collections_black_24dp"
-                android:tint="#B6B3B2"
-                android:visibility="gone"/>
 
             <LinearLayout
                 android:id="@+id/ln_imgBrn_addPhoto"
@@ -44,22 +28,33 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
+                <EditText
+                    android:id="@+id/et_petName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:hint="Your pet's name"
+                    android:textSize="25dp" />
+
                 <ImageButton
                     android:id="@+id/imgBtn_pickFromAlbum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0"
                     android:onClick="pickImgFromAlbum"
                     android:src="@drawable/ic_collections_black_50dp"
-                    android:tint="#fff"/>
-
-                <ImageButton
-                    android:id="@+id/imgBtn_pickFromCamera"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_add_a_photo_black_50dp"
-                    android:tint="#fff"/>
-
+                    android:tint="#fff" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgv_petPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#D8D5D4"
+                android:src="@drawable/ic_collections_black_24dp"
+                android:tint="#B6B3B2"
+                android:visibility="gone" />
+
 
             <View
                 android:layout_width="fill_parent"
@@ -73,40 +68,40 @@
                 android:text="Size"
                 android:textSize="20dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
 
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/small1"
-                        tools:layout_gravity="bottom|center_horizontal"
-                        android:layout_weight="1"
-                        android:backgroundTint="#00000000"
-                        android:id="@+id/imgBtn_small"
-                        android:onClick="selectedSize"/>
+                <ImageButton
+                    android:id="@+id/imgBtn_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00000000"
+                    android:onClick="selectedSize"
+                    android:src="@drawable/small1"
+                    tools:layout_gravity="bottom|center_horizontal" />
 
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/medium"
-                        android:layout_weight="1"
-                        android:backgroundTint="#00000000"
-                        android:id="@+id/imgBtn_medium"
-                        android:onClick="selectedSize"/>
+                <ImageButton
+                    android:id="@+id/imgBtn_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00000000"
+                    android:onClick="selectedSize"
+                    android:src="@drawable/medium" />
 
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/large"
-                        android:layout_weight="1"
-                        android:backgroundTint="#00000000"
-                        android:id="@+id/imgBtn_big"
-                        android:onClick="selectedSize"/>
+                <ImageButton
+                    android:id="@+id/imgBtn_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#00000000"
+                    android:onClick="selectedSize"
+                    android:src="@drawable/large" />
 
             </LinearLayout>
 
@@ -120,12 +115,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Breed"
-                android:textSize="20dp"/>
+                android:textSize="20dp" />
+
             <EditText
+                android:id="@+id/et_petBreed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:id="@+id/et_petBreed"/>
+                android:textSize="20dp" />
+
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"

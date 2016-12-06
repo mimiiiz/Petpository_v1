@@ -157,6 +157,7 @@ public class AddPet1Activity extends AppCompatActivity {
                 mDatabase.child("Owner").child(owner_UID).child("Pet").child(keyGenPetID).setValue(Pet);
 
                 Intent intent = new Intent(AddPet1Activity.this, MyPetsActivity.class);
+                Toast.makeText(AddPet1Activity.this, "Add pet success !", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
