@@ -90,6 +90,7 @@ public class PendingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 dialog.dismiss();
                 Intent intentToRecentReq = new Intent(PendingActivity.this, RecentRequestActivity.class);
+                intentToRecentReq.putExtra("placeId", requestPlaceId);
                 startActivity(intentToRecentReq);
                 finish();
             }

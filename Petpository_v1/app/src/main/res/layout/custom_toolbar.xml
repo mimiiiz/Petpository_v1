@@ -42,7 +42,6 @@
             android:padding="8dp"
             android:tint="#FFFFFF"
             android:id="@+id/sortCardBt"
-            android:src="@drawable/ic_place_black_24dp"
             android:background="@color/colorPrimary"/>
 
 
