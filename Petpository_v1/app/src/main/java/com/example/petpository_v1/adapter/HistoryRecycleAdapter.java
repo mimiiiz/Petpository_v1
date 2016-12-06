@@ -76,6 +76,9 @@ public class HistoryRecycleAdapter extends RecyclerView.Adapter<HistoryRecycleAd
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Pet pet = historyList.get(position).getPet();
         holder.petName.setText(pet.getPetName());
+
+        String sitterUID = historyList.get(position).getRequestUID_sitter();
+
 //        holder.sitterName.setText(historyList.get(position).getRequestUID_sitter());
         /*
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yy");
