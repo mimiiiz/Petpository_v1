@@ -121,7 +121,6 @@ public class RecentRequestActivity extends AppCompatActivity implements RecentRe
         Log.d("aaaa", "aaaaa");
         final Dialog dialog = new Dialog(RecentRequestActivity.this);
         dialog.setContentView(R.layout.recentpet_dialog);
-        dialog.setTitle("Request Detail");
 
         final ImageView dogImg = (ImageView) dialog.findViewById(R.id.dogimg);
 
