@@ -77,6 +77,7 @@ public class OwnerMainActivity extends AppCompatActivity {
         recentPlaceQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                placeList.clear();
                 for (DataSnapshot placeSnapshot: dataSnapshot.getChildren()){
                     Place place = new Place();
                     place = placeSnapshot.getValue(Place.class);

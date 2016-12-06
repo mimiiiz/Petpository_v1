@@ -19,6 +19,7 @@ public class RequestPet implements Serializable {
     private String requestEndDate;
     private Pet Pet;
     private String requestPetID;
+    private String OwnerPhoneNo;
 
     public com.example.petpository_v1.Model.Pet getPet() {
         return Pet;
