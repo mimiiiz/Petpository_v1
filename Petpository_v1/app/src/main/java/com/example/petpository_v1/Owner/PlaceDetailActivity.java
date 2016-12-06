@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.petpository_v1.Model.Place;
 import com.example.petpository_v1.R;
 import com.example.petpository_v1.adapter.SlideImageAdapter;
@@ -62,22 +63,29 @@ public class PlaceDetailActivity extends AppCompatActivity implements OnMapReady
 
         //image button
         phonebt = (ImageButton) findViewById(R.id.phone);
+        phonebt.setVisibility(View.GONE);
         websitebt = (ImageButton) findViewById(R.id.website);
+        websitebt.setVisibility(View.GONE);
         facebookbt = (ImageButton) findViewById(R.id.facebook);
+        facebookbt.setVisibility(View.GONE);
         linebt = (ImageButton) findViewById(R.id.line);
+        linebt.setVisibility(View.GONE);
         instagrambt = (ImageButton) findViewById(R.id.instagram);
+        instagrambt.setVisibility(View.GONE);
         bookbt = (Button) findViewById(R.id.bookbt);
+
 
         //setText to TextView
         name.setText(placeName);
         detail.setText(placeDetail);
-        price.setText(placePrice);
+        price.setText(placePrice+" Baht/Day");
         workday.setText(placeWorkDay);
 
         largeImg  = (ImageView)findViewById(R.id.large);
         mediumImg = (ImageView)findViewById(R.id.medium);
         smallImg = (ImageView)findViewById(R.id.small);
         setDogSizeImage();
+        setSocialImage();
 
         // **************** ImageSlider ********************
         ViewPager mViewPager = (ViewPager) findViewById(R.id.placeimg);
@@ -118,6 +126,26 @@ public class PlaceDetailActivity extends AppCompatActivity implements OnMapReady
             }if(dogSize.get(i).equals("Large")){
                 largeImg.setImageResource(R.drawable.large);
             }
+        }
+    }
+
+    //set social image if string not null
+    public void setSocialImage(){
+        if(placeTel.length()!=0) {
+            phonebt.setVisibility(View.VISIBLE);
+            Glide.with(context).load(R.drawable.ic_phone).fitCenter().centerCrop().into(phonebt);phonebt.setImageResource(R.drawable.ic_phone);
+        }if(placeWebsite.length()!=0){
+            websitebt.setVisibility(View.VISIBLE);
+            Glide.with(context).load(R.drawable.ic_website).fitCenter().centerCrop().into(websitebt);
+        }if(placeFacebook.length()!=0) {
+            facebookbt.setVisibility(View.VISIBLE);
+            Glide.with(context).load(R.drawable.ic_facebook).fitCenter().centerCrop().into(facebookbt);
+        }if(placeLine.length()!=0) {
+            linebt.setVisibility(View.VISIBLE);
+            Glide.with(context).load(R.drawable.ic_line).fitCenter().centerCrop().into(linebt);
+        }if(placeIg.length()!=0){
+            instagrambt.setVisibility(View.VISIBLE);
+            Glide.with(context).load(R.drawable.ic_instagram).fitCenter().centerCrop().into(instagrambt);
         }
     }
 
