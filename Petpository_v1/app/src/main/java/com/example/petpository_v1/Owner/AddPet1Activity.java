@@ -207,7 +207,7 @@ public class AddPet1Activity extends AppCompatActivity {
                         myPetRef = mDatabase.child("Owner").child(owner_UID).child("Pet").child(keyGenPetID);
                         myPetRef.addChildEventListener(childEventListener);
                         startActivity(intent);
-
+                        confirmAddDialog.dismiss();
                     }
                 });
 
