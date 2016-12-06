@@ -183,11 +183,12 @@
                 android:layout_below="@+id/pricetv"/>
 
             <!--************************ Contact ************************-->
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/pricetv"
+                android:orientation="horizontal"
                 android:id="@+id/re1">
 
                 <ImageButton
@@ -196,8 +197,8 @@
                     android:id="@+id/phone"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:onClick="onClickPhone"
-                    android:background="@drawable/ic_phone" />
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="onClickPhone" />
 
                 <ImageButton
                     android:layout_width="42dp"
@@ -205,10 +206,9 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginBottom="20dp"
-                    android:layout_toRightOf="@+id/phone"
                     android:id="@+id/website"
-                    android:onClick="onClickWebsite"
-                    android:background="@drawable/ic_website"/>
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="onClickWebsite"/>
 
                 <ImageButton
                     android:layout_width="38dp"
@@ -216,10 +216,9 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginBottom="20dp"
-                    android:layout_toRightOf="@+id/website"
                     android:id="@+id/facebook"
-                    android:onClick="onClickFacebook"
-                    android:background="@drawable/ic_facebook" />
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="onClickFacebook"/>
 
                 <ImageButton
                     android:layout_width="40dp"
@@ -228,9 +227,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginBottom="20dp"
-                    android:layout_toRightOf="@+id/facebook"
-                    android:onClick="onClickLine"
-                    android:background="@drawable/ic_line" />
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="onClickLine"/>
 
                 <ImageButton
                     android:layout_width="40dp"
@@ -238,15 +236,14 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginBottom="20dp"
-                    android:layout_toRightOf="@+id/line"
                     android:id="@+id/instagram"
-                    android:onClick="onClickInstagram"
-                    android:background="@drawable/ic_instagram"  />
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="onClickInstagram"/>
 
 
 
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <fragment
                 android:id="@+id/map"
