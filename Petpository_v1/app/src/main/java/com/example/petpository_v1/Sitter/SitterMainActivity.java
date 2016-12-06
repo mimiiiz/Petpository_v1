@@ -1,5 +1,6 @@
 package com.example.petpository_v1.Sitter;
 
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.firebase.database.DatabaseError;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,8 @@ public class SitterMainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     String uId;
 
+    int PLACE_PICKER_REQUEST = 1;
+    Double placeLatitude, placeLongtitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +102,26 @@ public class SitterMainActivity extends AppCompatActivity {
         });
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                com.google.android.gms.location.places.Place placePick = PlacePicker.getPlace(data, this);
+                String placeAdress = String.format("%s", placePick.getAddress());
+                placeLatitude = Double.parseDouble(String.format("%f",placePick.getLatLng().latitude));
+                placeLongtitude = Double.parseDouble(String.format("%f",placePick.getLatLng().longitude));
+                Log.d("ddd",placeLatitude.toString()+placeLongtitude.toString());
+                Intent intent = new Intent(SitterMainActivity.this, Add1PlaceActivity.class);
+                intent.putExtra("placeaddress", placeAdress);
+                intent.putExtra("lat", placeLatitude);
+                intent.putExtra("long", placeLongtitude);
+                startActivity(intent);
+            }
+        }else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 
 
     public void profileMenu(View view){
