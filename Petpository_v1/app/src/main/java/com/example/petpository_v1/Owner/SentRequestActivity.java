@@ -117,16 +117,7 @@ public class SentRequestActivity extends AppCompatActivity {
         dialogReview.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogReview.setContentView(R.layout.review_request_dialog);
         dialogReview.getWindow().setBackgroundDrawable(new ColorDrawable(00000000));
-        dialogReview.show();
-        petData = (Pet) getIntent().getSerializableExtra("pet_data");
-        Button confirmButton = (Button) dialogReview.findViewById(R.id.confirm_button);
-        TextView tv_petName = (TextView) dialogReview.findViewById(R.id.confirm_pet_name);
-        TextView tv_placeName = (TextView) dialogReview.findViewById(R.id.confirm_place_name);
-        TextView tv_amountDay = (TextView) dialogReview.findViewById(R.id.confirm_amount_day);
-        tv_petName.setText(petData.getPetName());
 
-        SharedPreferences spf = getSharedPreferences("current_place", Context.MODE_PRIVATE);
-        tv_placeName.setText(spf.getString("place_name",null));
 
         String startDateStr = startDateET.getText().toString();
         String endDateStr = endDateET.getText().toString();
@@ -141,6 +132,23 @@ public class SentRequestActivity extends AppCompatActivity {
         }
         long diff = endDateReal.getTime() - startDateReal.getTime();
         long diffDay = (diff / (60 * 60 * 1000 * 24 ))+1;
+        if (diff >= 0 ){
+            dialogReview.show();
+        }else {
+            Toast.makeText(SentRequestActivity.this, "Please Enter right date", Toast.LENGTH_SHORT).show();
+        }
+
+        petData = (Pet) getIntent().getSerializableExtra("pet_data");
+        Button confirmButton = (Button) dialogReview.findViewById(R.id.confirm_button);
+        TextView tv_petName = (TextView) dialogReview.findViewById(R.id.confirm_pet_name);
+        TextView tv_placeName = (TextView) dialogReview.findViewById(R.id.confirm_place_name);
+        TextView tv_amountDay = (TextView) dialogReview.findViewById(R.id.confirm_amount_day);
+        tv_petName.setText(petData.getPetName());
+
+        SharedPreferences spf = getSharedPreferences("current_place", Context.MODE_PRIVATE);
+        tv_placeName.setText(spf.getString("place_name",null));
+
+
 
         tv_amountDay.setText(diffDay  + " Days" );
 
