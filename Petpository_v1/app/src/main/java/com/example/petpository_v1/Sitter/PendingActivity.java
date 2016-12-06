@@ -1,12 +1,15 @@
 package com.example.petpository_v1.Sitter;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +41,7 @@ public class PendingActivity extends AppCompatActivity {
     public ArrayList<RequestPet> requestPetsArray;
     private FirebaseStorage mStorage;
     private ImageView imgv_petPic;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,21 +49,28 @@ public class PendingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pending);
         setTitle("Pending Request");
 
-        Intent intent = getIntent();
-        requestPlaceId = intent.getStringExtra("placeId");
+//        Intent intent = getIntent();
+//        requestPlaceId = intent.getStringExtra("placeId");
+        requestPlaceId = "123";
+
+
         createRequestPet();
+
 
     }
 
     protected void setTextView(RequestPet requestPetObj){
 
-        imgv_petPic = (ImageView) findViewById(R.id.imgv_petRequest);
-        tv_requestPetName = (TextView) findViewById(R.id.tv_requestPetName);
-        tv_requestPetSize = (TextView) findViewById(R.id.tv_requestPetSize);
-        tv_requestPetType = (TextView) findViewById(R.id.tv_requestPetType);
-        tv_requestOwnerEmail = (TextView) findViewById(R.id.tv_requestOwnerEmail);
-        tv_requestStartDate = (TextView) findViewById(R.id.tv_requestStartDate);
-        tv_requestEndDate = (TextView) findViewById(R.id.tv_requestEndDate);
+        dialog = new Dialog(PendingActivity.this);
+        dialog.setContentView(R.layout.pending_dialog);
+
+        imgv_petPic = (ImageView)dialog.findViewById(R.id.imgv_petRequest);
+        tv_requestPetName = (TextView) dialog.findViewById(R.id.tv_requestPetName);
+        tv_requestPetSize = (TextView) dialog.findViewById(R.id.tv_requestPetSize);
+        tv_requestPetType = (TextView) dialog.findViewById(R.id.tv_requestPetType);
+        tv_requestOwnerEmail = (TextView) dialog.findViewById(R.id.tv_requestOwnerEmail);
+        tv_requestStartDate = (TextView) dialog.findViewById(R.id.tv_requestStartDate);
+        tv_requestEndDate = (TextView) dialog.findViewById(R.id.tv_requestEndDate);
 
         Pet petObj = requestPetObj.getPet();
         tv_requestPetName.setText(petObj.getPetName());
@@ -67,6 +78,11 @@ public class PendingActivity extends AppCompatActivity {
         tv_requestPetSize.setText(petObj.getPetSize());
         tv_requestStartDate.setText(requestPetObj.getRequestStartDate());
         tv_requestEndDate.setText(requestPetObj.getRequestEndDate());
+
+        Button acceptbt = (Button)dialog.findViewById(R.id.btn_accept);
+        acceptbt.setTextColor(Color.parseColor("#ffffff"));
+        Button declinebt = (Button)dialog.findViewById(R.id.btn_denied);
+        declinebt.setTextColor(Color.parseColor("#ffffff"));
 
         //get pet img
         mStorage = FirebaseStorage.getInstance();
@@ -97,8 +113,7 @@ public class PendingActivity extends AppCompatActivity {
 
             }
         });
-
-
+        dialog.show();
 
 
     }
@@ -145,6 +160,7 @@ public class PendingActivity extends AppCompatActivity {
 
                 if (requestPetsArray.size() != 0){
                     for (RequestPet reqPet : requestPetsArray){
+                        Log.d("a",">>>>>>>>>>>>>array");
                         setTextView(reqPet);
                     }
 

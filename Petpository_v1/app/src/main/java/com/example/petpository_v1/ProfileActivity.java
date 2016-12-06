@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.petpository_v1.Sitter.PendingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -28,7 +29,8 @@ public class ProfileActivity extends AppCompatActivity {
     private String mEmail;
     private String mPhotoUrl;
 
-    TextView mainButton;
+
+    TextView mainButton, historyButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +61,18 @@ public class ProfileActivity extends AppCompatActivity {
                     .into(image);
         }
         mainButton = (TextView) findViewById(R.id.main_button);
+        historyButton = (TextView) findViewById(R.id.history_button);
         if (mode.equals("Owner")) {
             mainButton.setText("My pets");
         }else if (mode.equals("Sitter")){
             mainButton.setText("My places");
+            historyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ProfileActivity.this, PendingActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
     }
@@ -93,5 +103,7 @@ public class ProfileActivity extends AppCompatActivity {
         editor.commit();
         startActivity(new Intent(this, MainActivity.class));
     }
+
+
 
 }
