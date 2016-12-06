@@ -92,5 +92,11 @@ public class RequestPet implements Serializable {
         this.requestEndDate = requestEndDate;
     }
 
+    public String getOwnerPhoneNo() {
+        return OwnerPhoneNo;
+    }
 
+    public void setOwnerPhoneNo(String ownerPhoneNo) {
+        OwnerPhoneNo = ownerPhoneNo;
+    }
 }
