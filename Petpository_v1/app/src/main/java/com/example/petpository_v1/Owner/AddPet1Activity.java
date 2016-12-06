@@ -149,12 +149,17 @@ public class AddPet1Activity extends AppCompatActivity {
             }
         });
 
+        imgv_petPhoto = (ImageView) findViewById(R.id.imgv_petPhoto);
+        
         btn_addPet = (Button) findViewById(R.id.btn_addPet);
         imagesPet1 = new ArrayList<>();
 
         btn_addPet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (imgv_petPhoto.getVisibility() == View.VISIBLE){
+                    //set velue
 
                 petName = et_petName.getText().toString();
                 et_petBreed = (EditText) findViewById(R.id.et_petBreed);
@@ -219,8 +224,11 @@ public class AddPet1Activity extends AppCompatActivity {
                     }
                 });
 
-
+                } else {
+                    Toast.makeText(AddPet1Activity.this, "Please select image of your pet.", Toast.LENGTH_SHORT).show();
+                }
             }
+
         });
     }
 
@@ -299,9 +307,10 @@ public class AddPet1Activity extends AppCompatActivity {
         }
 
         /*** Set image view ***/
-        imgv_petPhoto = (ImageView) findViewById(R.id.imgv_petPhoto);
+
         Glide.with(getApplicationContext()).load(file).fitCenter().centerCrop().into(imgv_petPhoto);
         imgv_petPhoto.setVisibility(View.VISIBLE);
+        Log.d("is shown2 ?", (imgv_petPhoto.getVisibility() == View.VISIBLE) + "");
     }
 
     @Override
