@@ -20,8 +20,14 @@ public class RequestPet implements Serializable {
     private Pet Pet;
     private String OwnerPhoneNo;
     private String requestPlaceName;
-    private String requestPlacePhotoURL;
 
+    public String getRequestPlaceName() {
+        return requestPlaceName;
+    }
+
+    public void setRequestPlaceName(String requestPlaceName) {
+        this.requestPlaceName = requestPlaceName;
+    }
 
     public com.example.petpository_v1.Model.Pet getPet() {
         return Pet;

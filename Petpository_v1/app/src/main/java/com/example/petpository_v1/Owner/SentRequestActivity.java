@@ -178,17 +178,8 @@ public class SentRequestActivity extends AppCompatActivity {
                 newRequestPet.setRequestEndDate(endDateET.getText().toString());
                 newRequestPet.setPet(petData);
                 newRequestPet.setOwnerPhoneNo(phone.getText().toString());
+                newRequestPet.setRequestPlaceName(sp.getString("place_name",null));
 
-                Log.d("newRequestPet", newRequestPet.getRequestID()
-                        + "\n" + newRequestPet.getRequestUID_owner()
-                        + "\n" + newRequestPet.getRequestUID_sitter()
-                        + "\n" + newRequestPet.getRequestStatus()
-                        + "\n" + newRequestPet.getRequestPlaceID()
-                        + "\n" + newRequestPet.getRequestTimeStamp()
-                        + "\n" + newRequestPet.getRequestStartDate()
-                        + "\n" + newRequestPet.getRequestEndDate()
-                        + "\n" + newRequestPet.getPet().getPetID()
-                        + "\n" + newRequestPet.getOwnerPhoneNo() + "\n");
                 requestRef.child(genkey).setValue(newRequestPet);
                 sp.edit().clear();
                 dialogReview.cancel();
