@@ -45,7 +45,6 @@ public class PendingActivity extends AppCompatActivity {
     public ArrayList<RequestPet> requestPetsArray;
     private FirebaseStorage mStorage;
     private ImageView imgv_petPic;
-    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class PendingActivity extends AppCompatActivity {
 
     protected void setTextView(RequestPet requestPetObj) {
 
-        dialog = new Dialog(PendingActivity.this);
+        final Dialog dialog = new Dialog(PendingActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.pending_dialog);
 
@@ -187,47 +186,56 @@ public class PendingActivity extends AppCompatActivity {
 
     public void createRequestPet() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query mQ = mDatabase.child("RequestPet").orderByChild("requestTimeStamp");
-        mQ.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                requestPetsArray = new ArrayList<RequestPet>();
-                for (DataSnapshot mSnap : dataSnapshot.getChildren()) {
-
-                    //check place id same selected && status = pending
-                    if (mSnap.child("requestPlaceID").getValue().toString().equals(requestPlaceId)
-                            && mSnap.child("requestStatus").getValue().toString().equals("pending")) {
-                        requestPetObj = new RequestPet();
-                        requestPetObj = mSnap.getValue(RequestPet.class);
-                        requestPetsArray.add(requestPetObj);
-                    } //end if
-                } // end for
-
-
-                if (requestPetsArray.size() != 0) {
-                    for (RequestPet reqPet : requestPetsArray) {
-                        Log.d("a", ">>>>>>>>>>>>>array");
-                        setTextView(reqPet);
-                    }
-
-                } else {
-                    Intent intentToRecentReq = new Intent(PendingActivity.this, RecentRequestActivity.class);
-                    intentToRecentReq.putExtra("placeId", requestPlaceId);
-                    startActivity(intentToRecentReq);
-                    finish();
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-        }); //end value listener
+        mQ = mDatabase.child("RequestPet").orderByChild("requestTimeStamp");
+        mQ.addValueEventListener(listener); //end value listener
 
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mQ.removeEventListener(listener);
+    }
+
+    private Query mQ;
+    private ValueEventListener listener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+
+            requestPetsArray = new ArrayList<RequestPet>();
+            for (DataSnapshot mSnap : dataSnapshot.getChildren()) {
+                //check place id same selected && status = pending
+                if (mSnap.child("requestPlaceID").getValue().toString().equals(requestPlaceId)
+                        && mSnap.child("requestStatus").getValue().toString().equals("pending")) {
+                    Log.d("mSnap", mSnap.toString());
+                    requestPetObj = new RequestPet();
+                    requestPetObj = mSnap.getValue(RequestPet.class);
+                    requestPetsArray.add(requestPetObj);
+                } //end if
+            } // end for
+
+
+            if (requestPetsArray.size() != 0) {
+                for (RequestPet reqPet : requestPetsArray) {
+                    Log.d("a", ">>>>>>>>>>>>>array");
+                    setTextView(reqPet);
+                }
+
+            } else {
+                Intent intentToRecentReq = new Intent(PendingActivity.this, RecentRequestActivity.class);
+                intentToRecentReq.putExtra("placeId", requestPlaceId);
+                startActivity(intentToRecentReq);
+                finish();
+            }
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+
+    };
 
 
 }

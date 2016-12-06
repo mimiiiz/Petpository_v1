@@ -106,6 +106,7 @@ public class RecentRequestActivity extends AppCompatActivity implements RecentRe
                 requests.clear();
                 for (DataSnapshot requestSnapshot: dataSnapshot.getChildren()){
                     RequestPet request = requestSnapshot.getValue(RequestPet.class);
+                    Log.d("request", request.getRequestStatus());
                     if(request.getRequestStatus().equals("accept")){
                         requests.add(request);
                     }
