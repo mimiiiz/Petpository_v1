@@ -55,7 +55,7 @@ public class AddPet1Activity extends AppCompatActivity {
     private String petName, keyGenPetID, owner_UID, petType;
     private Pet Pet;
     private ImageButton imgBtn_small, imgBtn_medium, imgBtn_big;
-    private String size = "";
+    private String size = "Small";
     private ArrayList<Image> imagesPet1;
     private DatabaseReference mDatabase;
     private DatabaseReference myPetRef;
@@ -150,7 +150,8 @@ public class AddPet1Activity extends AppCompatActivity {
         });
 
         imgv_petPhoto = (ImageView) findViewById(R.id.imgv_petPhoto);
-        
+        imgBtn_small = (ImageButton) findViewById(R.id.imgBtn_small);
+        imgBtn_small.setColorFilter(R.color.colorDivider);
         btn_addPet = (Button) findViewById(R.id.btn_addPet);
         imagesPet1 = new ArrayList<>();
 
