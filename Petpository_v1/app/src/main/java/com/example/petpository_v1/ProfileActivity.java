@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.petpository_v1.Owner.AddPet1Activity;
 import com.example.petpository_v1.Owner.MyPetsActivity;
+import com.example.petpository_v1.Sitter.SitterMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -67,7 +68,6 @@ public class ProfileActivity extends AppCompatActivity {
             mainButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ProfileActivity.this, "toastttt", Toast.LENGTH_SHORT).show();
                     Intent intentToMyPets = new Intent(ProfileActivity.this, MyPetsActivity.class);
                     startActivity(intentToMyPets);
 //                    finish();
@@ -75,6 +75,13 @@ public class ProfileActivity extends AppCompatActivity {
             });
         }else if (mode.equals("Sitter")){
             mainButton.setText("My places");
+            mainButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent gotoSitterMain = new Intent(ProfileActivity.this, SitterMainActivity.class);
+                    startActivity(gotoSitterMain);
+                }
+            });
         }
 
     }
