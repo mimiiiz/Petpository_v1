@@ -30,10 +30,12 @@
         <activity android:name=".Owner.OwnerMainActivity" />
         <activity android:name=".Owner.AddPet1Activity" />
         <activity android:name=".Owner.PlaceDetailActivity" />
-        <activity android:name=".Sitter.AddPlaceActivity" />
+        <activity android:name=".Sitter.Add1PlaceActivity" />
         <activity android:name=".Owner.SentRequestActivity" />
         <activity android:name=".Owner.ChoosePetActivity" />
         <activity android:name=".Owner.MyPetsActivity" />
+        <activity android:name=".Sitter.Add2PlaceActivity" />
+        <activity android:name=".Sitter.Add3PlaceActivity"></activity>
     </application>
 
 </manifest>
