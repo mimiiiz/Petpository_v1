@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by User on 2/12/2559.
  */
 
-public class Place implements Serializable {
+public class Place implements Serializable, Comparable<Place> {
     private String placeId;
     private String placeName;
     private String placeAddress;
@@ -30,6 +30,7 @@ public class Place implements Serializable {
     private String uidSitter;
     private  String placeActivity;
     private int placeDogNum;
+    private double distance;
     private ArrayList<String> placeDogSize;
     private Map<String, RequestPet> Client;
 
@@ -210,5 +211,18 @@ public class Place implements Serializable {
 
     public void setClient(Map<String, RequestPet> client) {
         Client = client;
+    }
+
+    @Override
+    public int compareTo(Place p) {
+        return Double.compare(p.getDistance(), getDistance());
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }

@@ -46,26 +46,27 @@
                     android:textSize="24sp" />
 
                 <LinearLayout
-                    android:layout_width="51dp"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="right"
                     android:layout_weight="0.50">
 
-                    <!--<ImageView-->
-                        <!--android:layout_width="16dp"-->
-                        <!--android:layout_height="16dp"-->
-                        <!--android:src="@drawable/pin"-->
-                        <!--android:layout_gravity="right"-->
-                        <!--android:layout_marginRight="10dp"/>-->
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/pin"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="10dp"/>
 
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:gravity="right"-->
-                        <!--android:text="... km "-->
-                        <!--android:textSize="14sp"-->
-                        <!--android:paddingRight="10dp"/>-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="... km "
+                        android:textSize="14sp"
+                        android:paddingRight="10dp"
+                        android:id="@+id/distanceLabel"/>
                 </LinearLayout>
             </LinearLayout>
 
