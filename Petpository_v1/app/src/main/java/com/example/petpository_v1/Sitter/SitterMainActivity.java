@@ -71,7 +71,7 @@ public class SitterMainActivity extends AppCompatActivity {
             // FirebaseUser.getToken() instead.
             String uid = user.getUid();
         }
-    }
+
 
     private void getMyPlaces() {
         places = new ArrayList<>();

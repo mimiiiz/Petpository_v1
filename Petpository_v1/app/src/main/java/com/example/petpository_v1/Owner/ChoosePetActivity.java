@@ -110,7 +110,7 @@ public class ChoosePetActivity extends AppCompatActivity {
     }
 
     public void addPet(View view){
-        startActivity(new Intent(this,AddPetActivity.class));
+        startActivity(new Intent(this,AddPet1Activity.class));
         finish();
     }
 }

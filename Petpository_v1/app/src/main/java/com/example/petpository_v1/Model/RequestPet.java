@@ -20,13 +20,6 @@ public class RequestPet implements Serializable {
     private Pet Pet;
     private String OwnerPhoneNo;
 
-    public String getRequestPetID() {
-        return requestPetID;
-    }
-
-    public void setRequestPetID(String requestPetID) {
-        this.requestPetID = requestPetID;
-    }
 
     public com.example.petpository_v1.Model.Pet getPet() {
         return Pet;
