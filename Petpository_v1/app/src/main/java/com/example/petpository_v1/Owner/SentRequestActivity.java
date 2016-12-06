@@ -58,7 +58,7 @@ public class SentRequestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sent_request);
 
         format = new SimpleDateFormat("dd-MM-yy");
-        String timestamp = format.format(new Date());
+        timestamp = format.format(new Date());
 
         startDateET = (EditText) findViewById(R.id.start_date);
         endDateET = (EditText) findViewById(R.id.end_date);
@@ -96,7 +96,7 @@ public class SentRequestActivity extends AppCompatActivity {
         getDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.hide();
+                dialog.cancel();
                 int dayOfMouth = datePicker.getDayOfMonth();
                 int month = datePicker.getMonth();
                 int year = datePicker.getYear();
@@ -135,7 +135,7 @@ public class SentRequestActivity extends AppCompatActivity {
 
                 newRequestPet.setRequestID(genkey);
                 newRequestPet.setRequestUID_owner(sp.getString("owner_id",null));
-                newRequestPet.setRequestUID_sitter(sp.getString("sister_id",null));
+                newRequestPet.setRequestUID_sitter(sp.getString("sitter_id",null));
                 newRequestPet.setRequestStatus("pending");
                 newRequestPet.setRequestPlaceID(sp.getString("place_id",null));
                 newRequestPet.setRequestTimeStamp(timestamp);
@@ -154,10 +154,11 @@ public class SentRequestActivity extends AppCompatActivity {
                         + "\n" + newRequestPet.getRequestEndDate()
                         + "\n" + newRequestPet.getPet().getPetID()
                         + "\n" + newRequestPet.getOwnerPhoneNo() + "\n");
-//                requestRef.child(genkey).setValue(requestRef);
-//                dialogReview.hide();
-//                finish();
-//                startActivity(new Intent(SentRequestActivity.this, OwnerMainActivity.class));
+                requestRef.child(genkey).setValue(newRequestPet);
+                dialogReview.cancel();
+                startActivity(new Intent(SentRequestActivity.this, OwnerMainActivity.class));
+                finish();
+
             }
         });
     }

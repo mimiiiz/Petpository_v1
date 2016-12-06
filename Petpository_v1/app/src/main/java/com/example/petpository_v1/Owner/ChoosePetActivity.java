@@ -49,6 +49,7 @@ public class ChoosePetActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("current_place", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
+        currentUserUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         editor.putString("place_id", place_detail.getPlaceId());
         editor.putString("owner_id", currentUserUID);
         editor.putString("sitter_id",place_detail.getUidSitter());
@@ -105,6 +106,7 @@ public class ChoosePetActivity extends AppCompatActivity {
         if (petListEventListener != null) {
             myPetsRef.removeEventListener(petListEventListener);
         }
+        finish();
     }
 
     public void addPet(View view){
