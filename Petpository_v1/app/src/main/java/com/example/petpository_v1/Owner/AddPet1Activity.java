@@ -65,6 +65,16 @@ public class AddPet1Activity extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         owner_UID = mFirebaseUser.getUid();
 
+        /** Get Database Ref **/
+        storage = FirebaseStorage.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        /** Get Storage Ref **/
+        storageRef = storage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
+
+        keyGenPetID = mDatabase.child("Owner").child(owner_UID).child("Pet").push().getKey();
+        Pet = new Pet();
+        mDatabase.child("Owner").child(owner_UID).child("Pet").child(keyGenPetID).setValue(Pet);
 
         et_petName = (EditText) findViewById(R.id.et_petName);
         petName = et_petName.getText().toString();
@@ -128,17 +138,17 @@ public class AddPet1Activity extends AppCompatActivity {
         btn_addPet = (Button) findViewById(R.id.btn_addPet);
         imagesPet1 = new ArrayList<>();
 
-        storage = FirebaseStorage.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        storageRef = storage.getReferenceFromUrl("gs://petpository-d8def.appspot.com");
+
+
+
 
 
         btn_addPet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                keyGenPetID = mDatabase.child("Owner").child(owner_UID).child("Pet").push().getKey();
 
-                Pet = new Pet();
+
+//                Pet = new Pet();
                 petName = et_petName.getText().toString();
                 et_petBreed = (EditText) findViewById(R.id.et_petBreed);
                 Pet.setPetName(petName);
@@ -148,8 +158,6 @@ public class AddPet1Activity extends AppCompatActivity {
                 Pet.setPetID(keyGenPetID);
 
                 mDatabase.child("Owner").child(owner_UID).child("Pet").child(keyGenPetID).setValue(Pet);
-
-                storeImage(keyGenPetID, owner_UID, imagesPet1);
 
                 Intent intent = new Intent(AddPet1Activity.this, MyPetsActivity.class);
                 startActivity(intent);
@@ -209,6 +217,8 @@ public class AddPet1Activity extends AppCompatActivity {
             //The array list has the image paths of the selected images
             imagesPet1 = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
             Toast.makeText(AddPet1Activity.this, "Add Images Successfully", Toast.LENGTH_SHORT).show();
+
+            storeImage(keyGenPetID, owner_UID, imagesPet1);
         }
     }
 
