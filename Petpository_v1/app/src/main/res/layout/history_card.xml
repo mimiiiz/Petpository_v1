@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/forward_arrow_black"
+                android:background="@drawable/arrow"
                 android:tint="@color/colorPrimaryText"/>
             <TextView
                 android:layout_width="match_parent"
