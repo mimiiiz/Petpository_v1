@@ -1,27 +1,111 @@
 {
   "project_info": {
-    "project_number": "830516589333",
-    "firebase_url": "https://petpositoryv1.firebaseio.com",
-    "project_id": "petpositoryv1",
-    "storage_bucket": "petpositoryv1.appspot.com"
+    "project_number": "437027216113",
+    "firebase_url": "https://petpository-d8def.firebaseio.com",
+    "project_id": "petpository-d8def",
+    "storage_bucket": "petpository-d8def.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:830516589333:android:04185db8f6733fe9",
+        "mobilesdk_app_id": "1:437027216113:android:62f3880bb9e711af",
+        "android_client_info": {
+          "package_name": "com.example.petpository"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437027216113-52ki5mopn8e8gc9fo3qa3klc3j6rjhnc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.petpository",
+            "certificate_hash": "413BFDC08CCF4832592965255DDF7CDFB12DA690"
+          }
+        },
+        {
+          "client_id": "437027216113-h5g2l9uiupp33nsv2em66ck2n5ucnsne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.petpository",
+            "certificate_hash": "03CFA118C559DEEF2C74CBD0D63F8E6AA2C9A911"
+          }
+        },
+        {
+          "client_id": "437027216113-8dkergf7mb4t80sruvuiusdev32tv97u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.petpository",
+            "certificate_hash": "3B70AED6BF79EBAC88DB4B207F2971983CB91A3E"
+          }
+        },
+        {
+          "client_id": "437027216113-2fpt44kp3rqcg4ki1gjorgdb9s10cb46.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.petpository",
+            "certificate_hash": "AF7C67EE24CFFF1E2DEEB9B81CC9DAC9143B1532"
+          }
+        },
+        {
+          "client_id": "437027216113-4gf8b49dg73u5v4afkme38bno88ncoki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.petpository",
+            "certificate_hash": "A7EFE632409D1644B44AE8C0893DD63230404B39"
+          }
+        },
+        {
+          "client_id": "437027216113-opdre4upopavh8f15mkvvh7077ebtfmp.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "437027216113-t1jvomal41j198b51f28dsrq2a4r5rda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd0AXxRg_J9DhsxavKk-One8UQCu7Hu9M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437027216113-opdre4upopavh8f15mkvvh7077ebtfmp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437027216113:android:04185db8f6733fe9",
         "android_client_info": {
           "package_name": "com.example.petpository_v1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "830516589333-ropn7j4evjbevbl8tetthf4vb02uac28.apps.googleusercontent.com",
+          "client_id": "437027216113-opdre4upopavh8f15mkvvh7077ebtfmp.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "437027216113-t1jvomal41j198b51f28dsrq2a4r5rda.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBy52NApcrT48w_iPRl9EFiGz4gwinJ2jA"
+          "current_key": "AIzaSyBd0AXxRg_J9DhsxavKk-One8UQCu7Hu9M"
         }
       ],
       "services": {

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pet_list_card_view"
+    android:layout_width="160dp"
+    android:layout_height="230dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="8dp"
+    android:layout_margin="16dp">
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="16dp"
+            android:id="@+id/my_pet_image"
+            android:background="@drawable/background_pet_circle_image"/>
+        <TextView
+            android:layout_marginTop="130dp"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:text="name"
+            android:id="@+id/my_pet_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true" />
+        <View
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="160dp"
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:background="@color/divider"/>
+        <TextView
+            android:layout_marginTop="165dp"
+            android:textAlignment="center"
+            android:text="breed"
+            android:id="@+id/my_pet_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"/>
+        <TextView
+            android:layout_gravity="right"
+            android:layout_margin="16dp"
+            android:text="L"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextIcons"
+            android:id="@+id/my_pet_size"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/background_pink_outline"/>
+</android.support.v7.widget.CardView>
