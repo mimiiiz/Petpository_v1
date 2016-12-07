@@ -27,7 +27,6 @@ public class Test_request_obj {
         requestPetObj.setRequestTimeStamp("06-12-2016");
         requestPetObj.setRequestStartDate("10-12-2016");
         requestPetObj.setRequestEndDate("12-12-2016");
-        requestPetObj.setRequestPetID("dog123");
 
     }
 
@@ -55,7 +54,5 @@ public class Test_request_obj {
     @Test
     public void test_request_reqEndDate(){assertEquals(requestPetObj.getRequestEndDate(), "12-12-2016");}
 
-    @Test
-    public void test_request_reqPetID(){assertEquals(requestPetObj.getRequestPetID(), "dog123");}
 
 }
