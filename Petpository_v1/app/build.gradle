@@ -62,6 +62,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services:9.8.0'
     //google play service gade same as plearn
+    testCompile 'junit:junit:4.12'
 }
 //init firebase ..mimi
 apply plugin: 'com.google.gms.google-services'

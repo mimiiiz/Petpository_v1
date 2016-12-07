@@ -28,7 +28,7 @@ public class Place implements Serializable, Comparable<Place> {
     private Double placeLongtitude;
     private int placeNumberImg;
     private String uidSitter;
-    private  String placeActivity;
+    private String placeActivity;
     private int placeDogNum;
     private double distance;
     private ArrayList<String> placeDogSize;
@@ -41,8 +41,6 @@ public class Place implements Serializable, Comparable<Place> {
     public void setPlaceActivity(String placeActivity) {
         this.placeActivity = placeActivity;
     }
-
-
 
     public String getPlaceId() {
 
