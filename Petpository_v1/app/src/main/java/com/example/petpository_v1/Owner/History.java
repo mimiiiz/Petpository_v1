@@ -26,7 +26,7 @@ public class History extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager;
 
     ArrayList<RequestPet> historyList;
 
@@ -54,6 +54,7 @@ public class History extends AppCompatActivity {
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,true);
+        mLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         historyList = new ArrayList();

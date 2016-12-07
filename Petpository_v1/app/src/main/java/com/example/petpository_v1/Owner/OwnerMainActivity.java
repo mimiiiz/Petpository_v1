@@ -225,7 +225,7 @@ public class OwnerMainActivity extends AppCompatActivity implements GoogleApiCli
                 Location l = new Location("aa");
                 l.setLatitude(p.getPlaceLatitude());
                 l.setLongitude(p.getPlaceLongtitude());
-                p.setDistance(mLastLocation.distanceTo(l));
+                p.setDistance(mLastLocation.distanceTo(l)/1000);
             }
         } else {
             onConnected(null);
